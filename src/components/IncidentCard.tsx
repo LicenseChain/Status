@@ -21,30 +21,34 @@ const statusConfig = {
   investigating: {
     icon: AlertTriangle,
     color: 'text-red-500',
-    bgColor: 'bg-red-50',
-    borderColor: 'border-red-200',
-    label: 'Investigating'
+    bgColor: 'bg-red-50 dark:bg-red-900/20',
+    borderColor: 'border-red-200 dark:border-red-800',
+    label: 'Investigating',
+    gradient: 'from-red-500 to-pink-500'
   },
   identified: {
     icon: Clock,
     color: 'text-yellow-500',
-    bgColor: 'bg-yellow-50',
-    borderColor: 'border-yellow-200',
-    label: 'Identified'
+    bgColor: 'bg-yellow-50 dark:bg-yellow-900/20',
+    borderColor: 'border-yellow-200 dark:border-yellow-800',
+    label: 'Identified',
+    gradient: 'from-yellow-500 to-orange-500'
   },
   monitoring: {
     icon: Clock,
     color: 'text-blue-500',
-    bgColor: 'bg-blue-50',
-    borderColor: 'border-blue-200',
-    label: 'Monitoring'
+    bgColor: 'bg-blue-50 dark:bg-blue-900/20',
+    borderColor: 'border-blue-200 dark:border-blue-800',
+    label: 'Monitoring',
+    gradient: 'from-blue-500 to-indigo-500'
   },
   resolved: {
     icon: CheckCircle,
     color: 'text-green-500',
-    bgColor: 'bg-green-50',
-    borderColor: 'border-green-200',
-    label: 'Resolved'
+    bgColor: 'bg-green-50 dark:bg-green-900/20',
+    borderColor: 'border-green-200 dark:border-green-800',
+    label: 'Resolved',
+    gradient: 'from-green-500 to-emerald-500'
   }
 }
 
@@ -53,41 +57,70 @@ export function IncidentCard({ incident }: IncidentCardProps) {
   const Icon = config.icon
 
   return (
-    <div className={cn(
-      'rounded-lg border p-6 mb-4',
-      config.bgColor,
-      config.borderColor
-    )}>
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center space-x-3">
-          <Icon className={cn('h-5 w-5 mt-0.5', config.color)} />
-          <h3 className="text-lg font-semibold text-gray-900">{incident.title}</h3>
-        </div>
-        <span className={cn(
-          'px-3 py-1 rounded-full text-sm font-medium',
-          config.color,
-          config.bgColor
-        )}>
-          {config.label}
-        </span>
-      </div>
-      
-      <p className="text-gray-600 mb-4">{incident.description}</p>
-      
-      <div className="space-y-2">
-        <div className="flex items-center text-sm text-gray-500">
-          <span className="font-medium mr-2">Affected services:</span>
-          <span>{incident.affectedServices.join(', ')}</span>
-        </div>
-        <div className="flex items-center text-sm text-gray-500">
-          <span className="font-medium mr-2">Created:</span>
-          <span>{incident.createdAt}</span>
-        </div>
-        <div className="flex items-center text-sm text-gray-500">
-          <span className="font-medium mr-2">Last updated:</span>
-          <span>{incident.updatedAt}</span>
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl">
+      {/* Status Header */}
+      <div className={cn(
+        'px-6 py-4 bg-gradient-to-r',
+        config.gradient
+      )}>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center justify-center w-10 h-10 bg-white/20 rounded-xl">
+              <Icon className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-white">{incident.title}</h3>
+              <p className="text-white/80 text-sm">Incident Report</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="text-white font-medium text-sm">{config.label}</span>
+          </div>
         </div>
       </div>
+
+      {/* Content */}
+      <div className="p-6">
+        <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+          {incident.description}
+        </p>
+        
+        {/* Details */}
+        <div className="space-y-4">
+          <div>
+            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Affected Services</h4>
+            <div className="flex flex-wrap gap-2">
+              {incident.affectedServices.map((service, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
+                >
+                  {service}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Created</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{incident.createdAt}</p>
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Last Updated</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{incident.updatedAt}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Status Indicator */}
+      <div className={cn(
+        'h-1 w-full',
+        incident.status === 'resolved' ? 'bg-green-500' :
+        incident.status === 'investigating' ? 'bg-red-500' :
+        incident.status === 'identified' ? 'bg-yellow-500' : 'bg-blue-500'
+      )}></div>
     </div>
   )
 }
