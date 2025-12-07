@@ -57,31 +57,35 @@ export function IncidentCard({ incident }: IncidentCardProps) {
   const Icon = config.icon
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl">
+    <div className={cn(
+      "rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl",
+      "glass-card dark:glass-card-dark"
+    )}>
       {/* Status Header */}
       <div className={cn(
-        'px-6 py-4 bg-gradient-to-r',
-        config.gradient
+        'px-6 py-4 bg-gradient-to-r backdrop-blur-sm',
+        config.gradient,
+        'border-b border-white/20'
       )}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="flex items-center justify-center w-10 h-10 bg-white/20 rounded-xl">
+            <div className="flex items-center justify-center w-10 h-10 bg-white/30 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg">
               <Icon className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">{incident.title}</h3>
-              <p className="text-white/80 text-sm">Incident Report</p>
+              <h3 className="text-lg font-bold text-white drop-shadow-md">{incident.title}</h3>
+              <p className="text-white/90 text-sm drop-shadow-sm">Incident Report</p>
             </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-white font-medium text-sm">{config.label}</span>
+          <div className="flex items-center space-x-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-lg border border-white/20">
+            <span className="text-white font-medium text-sm drop-shadow-sm">{config.label}</span>
           </div>
         </div>
       </div>
 
       {/* Content */}
       <div className="p-6">
-        <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+        <p className="text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
           {incident.description}
         </p>
         
@@ -93,7 +97,7 @@ export function IncidentCard({ incident }: IncidentCardProps) {
               {incident.affectedServices.map((service, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
+                  className="px-3 py-1 backdrop-blur-sm bg-white/20 dark:bg-black/20 text-gray-700 dark:text-gray-200 rounded-full text-sm border border-white/30 dark:border-white/10 shadow-sm"
                 >
                   {service}
                 </span>
@@ -102,13 +106,13 @@ export function IncidentCard({ incident }: IncidentCardProps) {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
+            <div className="p-3 rounded-lg bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
               <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Created</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">{incident.createdAt}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{incident.createdAt}</p>
             </div>
-            <div>
+            <div className="p-3 rounded-lg bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
               <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Last Updated</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">{incident.updatedAt}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{incident.updatedAt}</p>
             </div>
           </div>
         </div>
@@ -116,10 +120,10 @@ export function IncidentCard({ incident }: IncidentCardProps) {
 
       {/* Status Indicator */}
       <div className={cn(
-        'h-1 w-full',
-        incident.status === 'resolved' ? 'bg-green-500' :
-        incident.status === 'investigating' ? 'bg-red-500' :
-        incident.status === 'identified' ? 'bg-yellow-500' : 'bg-blue-500'
+        'h-1 w-full backdrop-blur-sm',
+        incident.status === 'resolved' ? 'bg-green-500/80' :
+        incident.status === 'investigating' ? 'bg-red-500/80' :
+        incident.status === 'identified' ? 'bg-yellow-500/80' : 'bg-blue-500/80'
       )}></div>
     </div>
   )

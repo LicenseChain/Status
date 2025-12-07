@@ -59,49 +59,53 @@ export function StatusCard({ service }: StatusCardProps) {
   const ServiceIcon = service.icon
 
   return (
-    <div className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div className={cn(
+      "group rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1",
+      "glass-card dark:glass-card-dark"
+    )}>
       {/* Status Header */}
       <div className={cn(
-        'px-6 py-4 bg-gradient-to-r',
-        config.gradient
+        'px-6 py-4 bg-gradient-to-r backdrop-blur-sm',
+        config.gradient,
+        'border-b border-white/20'
       )}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="flex items-center justify-center w-10 h-10 bg-white/20 rounded-xl">
+            <div className="flex items-center justify-center w-10 h-10 bg-white/30 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg">
               <ServiceIcon className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">{service.name}</h3>
-              <p className="text-white/80 text-sm">{service.uptime} uptime</p>
+              <h3 className="text-lg font-bold text-white drop-shadow-md">{service.name}</h3>
+              <p className="text-white/90 text-sm drop-shadow-sm">{service.uptime} uptime</p>
             </div>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-lg border border-white/20">
             <StatusIcon className="w-5 h-5 text-white" />
-            <span className="text-white font-medium text-sm">{config.label}</span>
+            <span className="text-white font-medium text-sm drop-shadow-sm">{config.label}</span>
           </div>
         </div>
       </div>
 
       {/* Content */}
       <div className="p-6">
-        <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+        <p className="text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
           {service.description}
         </p>
         
         {/* Metrics */}
         <div className="space-y-3">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-500 dark:text-gray-400">Last checked</span>
+          <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
+            <span className="text-gray-600 dark:text-gray-300">Last checked</span>
             <span className="font-medium text-gray-900 dark:text-white">{service.lastChecked}</span>
           </div>
           {service.responseTime && (
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-500 dark:text-gray-400">Response time</span>
+            <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
+              <span className="text-gray-600 dark:text-gray-300">Response time</span>
               <span className="font-medium text-gray-900 dark:text-white">{service.responseTime}ms</span>
             </div>
           )}
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-500 dark:text-gray-400">Uptime</span>
+          <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
+            <span className="text-gray-600 dark:text-gray-300">Uptime</span>
             <span className="font-medium text-green-600 dark:text-green-400">{service.uptime}</span>
           </div>
         </div>
@@ -109,10 +113,10 @@ export function StatusCard({ service }: StatusCardProps) {
 
       {/* Status Indicator */}
       <div className={cn(
-        'h-1 w-full',
-        service.status === 'operational' ? 'bg-green-500' :
-        service.status === 'degraded' ? 'bg-yellow-500' :
-        service.status === 'outage' ? 'bg-red-500' : 'bg-blue-500'
+        'h-1 w-full backdrop-blur-sm',
+        service.status === 'operational' ? 'bg-green-500/80' :
+        service.status === 'degraded' ? 'bg-yellow-500/80' :
+        service.status === 'outage' ? 'bg-red-500/80' : 'bg-blue-500/80'
       )}></div>
     </div>
   )

@@ -135,9 +135,10 @@ export default function StatusPage() {
   // Loading state
   if (isLoading && services.length === 0) {
   return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-6 animate-pulse">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-40"></div>
+        <div className="text-center relative z-10 backdrop-blur-sm bg-white/10 dark:bg-black/10 rounded-3xl p-12 border border-white/20 dark:border-white/10 shadow-2xl">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600/90 to-purple-600/90 backdrop-blur-sm rounded-2xl mb-6 animate-pulse border border-white/20 shadow-lg">
             <Shield className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Loading Status...</h1>
@@ -150,16 +151,17 @@ export default function StatusPage() {
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto p-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-500 rounded-2xl mb-6">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-40"></div>
+        <div className="text-center max-w-md mx-auto p-8 relative z-10 backdrop-blur-sm bg-white/10 dark:bg-black/10 rounded-3xl border border-white/20 dark:border-white/10 shadow-2xl">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-500/90 backdrop-blur-sm rounded-2xl mb-6 border border-white/20 shadow-lg">
             <XCircle className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Status Unavailable</h1>
           <p className="text-gray-600 dark:text-gray-300 mb-6">{error}</p>
           <button
             onClick={fetchStatusData}
-            className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors"
+            className="px-6 py-3 bg-blue-600/90 backdrop-blur-sm text-white rounded-xl border border-white/20 hover:bg-blue-700/90 transition-colors shadow-lg"
           >
             Try Again
           </button>
@@ -169,7 +171,8 @@ export default function StatusPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
       <StatusHeader 
         lastUpdated={lastUpdated}
         onRefresh={handleRefresh}
@@ -178,13 +181,13 @@ export default function StatusPage() {
         onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
       />
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-6 animate-pulse">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600/90 to-purple-600/90 backdrop-blur-sm rounded-2xl mb-6 animate-pulse border border-white/20 shadow-lg">
             <Shield className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in drop-shadow-sm">
             System Status
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto animate-fade-in-delay">
@@ -194,37 +197,37 @@ export default function StatusPage() {
 
         {/* Overall Status Card */}
         <div className="mb-12">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-            <div className="bg-gradient-to-r from-green-500 to-emerald-500 p-8 text-white">
+          <div className="glass-card dark:glass-card-dark rounded-2xl overflow-hidden">
+            <div className="bg-gradient-to-r from-green-500/90 to-emerald-500/90 backdrop-blur-sm p-8 text-white border-b border-white/20">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                  <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-xl">
+                  <div className="flex items-center justify-center w-12 h-12 bg-white/30 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold">All Systems Operational</h2>
-                    <p className="text-green-100 text-lg">
+                    <h2 className="text-2xl font-bold drop-shadow-md">All Systems Operational</h2>
+                    <p className="text-green-100 text-lg drop-shadow-sm">
                       {operationalCount} of {totalServices} services are running smoothly
                     </p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-3xl font-bold">99.8%</div>
-                  <div className="text-green-100">Uptime</div>
+                <div className="text-right px-4 py-2 bg-white/20 backdrop-blur-sm rounded-xl border border-white/20">
+                  <div className="text-3xl font-bold drop-shadow-md">99.8%</div>
+                  <div className="text-green-100 drop-shadow-sm">Uptime</div>
                 </div>
               </div>
             </div>
             <div className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center">
+                <div className="text-center p-4 rounded-xl bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">{operationalCount}</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Operational Services</div>
                 </div>
-                <div className="text-center">
+                <div className="text-center p-4 rounded-xl bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">0</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Active Incidents</div>
                 </div>
-                <div className="text-center">
+                <div className="text-center p-4 rounded-xl bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">45ms</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">Avg Response Time</div>
                 </div>
@@ -303,19 +306,19 @@ export default function StatusPage() {
 
         {/* Performance Metrics */}
         <div className="mb-12">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-8">
+          <div className="glass-card dark:glass-card-dark rounded-2xl p-8">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
               <TrendingUp className="w-5 h-5 mr-2 text-blue-600" />
               Performance Metrics
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+              <div className="text-center p-4 bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl border border-white/20 dark:border-white/10">
                 <div className="text-2xl font-bold text-green-600">
                   {services.length > 0 ? Math.round((operationalCount / totalServices) * 100) : 0}%
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">Service Uptime</div>
               </div>
-              <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+              <div className="text-center p-4 bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl border border-white/20 dark:border-white/10">
                 <div className="text-2xl font-bold text-blue-600">
                   {services.length > 0 
                     ? Math.round(services.reduce((acc, s) => acc + (s.responseTime || 0), 0) / services.filter(s => s.responseTime).length) || 0
@@ -323,11 +326,11 @@ export default function StatusPage() {
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">Avg Response</div>
               </div>
-              <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+              <div className="text-center p-4 bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl border border-white/20 dark:border-white/10">
                 <div className="text-2xl font-bold text-purple-600">{operationalCount}</div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">Operational</div>
               </div>
-              <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+              <div className="text-center p-4 bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl border border-white/20 dark:border-white/10">
                 <div className="text-2xl font-bold text-orange-600">
                   {totalServices - operationalCount}
                 </div>
@@ -338,8 +341,8 @@ export default function StatusPage() {
         </div>
 
         {/* Footer */}
-        <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
-          <div className="text-center">
+        <div className="mt-16 pt-8 border-t border-white/20 dark:border-white/10">
+          <div className="text-center backdrop-blur-sm bg-white/5 dark:bg-black/5 rounded-2xl p-6 border border-white/10 dark:border-white/5">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Shield className="w-5 h-5 text-blue-600" />
               <span className="text-sm text-gray-600 dark:text-gray-400">Status page powered by LicenseChain</span>
