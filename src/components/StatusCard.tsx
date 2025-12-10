@@ -75,7 +75,7 @@ export function StatusCard({ service }: StatusCardProps) {
               <ServiceIcon className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-bold drop-shadow-md" style={{ color: 'hsl(var(--muted-foreground))' }}>{service.name}</h3>
+              <h3 className="text-lg font-bold text-white drop-shadow-md">{service.name}</h3>
               <p className="text-white/90 text-sm drop-shadow-sm">{service.uptime} uptime</p>
             </div>
           </div>
@@ -88,24 +88,24 @@ export function StatusCard({ service }: StatusCardProps) {
 
       {/* Content */}
       <div className="p-6">
-        <p className="text-white dark:text-gray-200 mb-6 leading-relaxed">
+        <p className="text-slate-700 dark:text-gray-200 mb-6 leading-relaxed">
           {service.description}
         </p>
         
         {/* Metrics */}
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
-            <span className="text-white/80 dark:text-gray-300">Last checked</span>
-            <span className="font-medium text-white dark:text-white">{service.lastChecked}</span>
+            <span className="text-slate-600 dark:text-gray-300">Last checked</span>
+            <span className="font-medium text-slate-900 dark:text-white">{service.lastChecked}</span>
           </div>
           {service.responseTime && (
             <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
-              <span className="text-white/80 dark:text-gray-300">Response time</span>
-              <span className="font-medium text-white dark:text-white">{service.responseTime}ms</span>
+              <span className="text-slate-600 dark:text-gray-300">Response time</span>
+              <span className="font-medium text-slate-900 dark:text-white">{service.responseTime}ms</span>
             </div>
           )}
           <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
-            <span className="text-white/80 dark:text-gray-300">Uptime</span>
+            <span className="text-slate-600 dark:text-gray-300">Uptime</span>
             <span className="font-medium text-green-600 dark:text-green-400">{service.uptime}</span>
           </div>
         </div>
