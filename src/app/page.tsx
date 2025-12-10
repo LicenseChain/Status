@@ -135,14 +135,21 @@ export default function StatusPage() {
   // Loading state
   if (isLoading && services.length === 0) {
   return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-40"></div>
-        <div className="text-center relative z-10 backdrop-blur-sm bg-white/10 dark:bg-black/10 rounded-3xl p-12 border border-white/20 dark:border-white/10 shadow-2xl">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600/90 to-purple-600/90 backdrop-blur-sm rounded-2xl mb-6 animate-pulse border border-white/20 shadow-lg">
-            <Shield className="w-8 h-8 text-white" />
+      <div className="min-h-screen relative overflow-x-hidden">
+        <div className="fixed inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 dark:from-slate-950 dark:via-purple-950/20 dark:to-slate-950"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.3),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.3),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.2),transparent_50%)]"></div>
+        </div>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center glass-card dark:glass-card-dark rounded-3xl p-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-6 animate-pulse shadow-lg">
+              <Shield className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Loading Status...</h1>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Loading Status...</h1>
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
         </div>
       </div>
     )
@@ -151,28 +158,40 @@ export default function StatusPage() {
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-40"></div>
-        <div className="text-center max-w-md mx-auto p-8 relative z-10 backdrop-blur-sm bg-white/10 dark:bg-black/10 rounded-3xl border border-white/20 dark:border-white/10 shadow-2xl">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-500/90 backdrop-blur-sm rounded-2xl mb-6 border border-white/20 shadow-lg">
-            <XCircle className="w-8 h-8 text-white" />
+      <div className="min-h-screen relative overflow-x-hidden">
+        <div className="fixed inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 dark:from-slate-950 dark:via-purple-950/20 dark:to-slate-950"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.3),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.3),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.2),transparent_50%)]"></div>
+        </div>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center max-w-md mx-auto p-8 glass-card dark:glass-card-dark rounded-3xl">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-red-500 rounded-2xl mb-6 shadow-lg">
+              <XCircle className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Status Unavailable</h1>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">{error}</p>
+            <button
+              onClick={fetchStatusData}
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-colors shadow-lg"
+            >
+              Try Again
+            </button>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Status Unavailable</h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">{error}</p>
-          <button
-            onClick={fetchStatusData}
-            className="px-6 py-3 bg-blue-600/90 backdrop-blur-sm text-white rounded-xl border border-white/20 hover:bg-blue-700/90 transition-colors shadow-lg"
-          >
-            Try Again
-          </button>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+    <div className="min-h-screen relative overflow-x-hidden">
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 dark:from-slate-950 dark:via-purple-950/20 dark:to-slate-950"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.3),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.3),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.2),transparent_50%)]"></div>
+      </div>
       <StatusHeader 
         lastUpdated={lastUpdated}
         onRefresh={handleRefresh}
@@ -181,16 +200,16 @@ export default function StatusPage() {
         onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
       />
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-0">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600/90 to-purple-600/90 backdrop-blur-sm rounded-2xl mb-6 animate-pulse border border-white/20 shadow-lg">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-6 animate-pulse shadow-lg">
             <Shield className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in drop-shadow-sm">
-            System Status
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">
+            <span className="gradient-text">System Status</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto animate-fade-in-delay">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-delay">
             Real-time monitoring of all LicenseChain services and infrastructure
           </p>
         </div>
@@ -219,17 +238,17 @@ export default function StatusPage() {
             </div>
             <div className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-4 rounded-xl bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{operationalCount}</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Operational Services</div>
+                <div className="text-center p-4 rounded-xl glass-card dark:glass-card-dark">
+                  <div className="text-2xl font-bold text-foreground">{operationalCount}</div>
+                  <div className="text-sm text-muted-foreground">Operational Services</div>
                 </div>
-                <div className="text-center p-4 rounded-xl bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white">0</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Active Incidents</div>
+                <div className="text-center p-4 rounded-xl glass-card dark:glass-card-dark">
+                  <div className="text-2xl font-bold text-foreground">0</div>
+                  <div className="text-sm text-muted-foreground">Active Incidents</div>
                 </div>
-                <div className="text-center p-4 rounded-xl bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white">45ms</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Avg Response Time</div>
+                <div className="text-center p-4 rounded-xl glass-card dark:glass-card-dark">
+                  <div className="text-2xl font-bold text-foreground">45ms</div>
+                  <div className="text-sm text-muted-foreground">Avg Response Time</div>
                 </div>
               </div>
             </div>
@@ -241,7 +260,7 @@ export default function StatusPage() {
           <div className="flex items-center mb-8">
             <div className="flex items-center space-x-3">
               <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Core Services</h2>
+              <h2 className="text-2xl font-bold text-foreground">Core Services</h2>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -258,7 +277,7 @@ export default function StatusPage() {
           <div className="flex items-center mb-8">
             <div className="flex items-center space-x-3">
               <div className="w-1 h-8 bg-gradient-to-b from-green-500 to-teal-500 rounded-full"></div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Infrastructure</h2>
+              <h2 className="text-2xl font-bold text-foreground">Infrastructure</h2>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -275,7 +294,7 @@ export default function StatusPage() {
           <div className="flex items-center mb-8">
             <div className="flex items-center space-x-3">
               <div className="w-1 h-8 bg-gradient-to-b from-yellow-500 to-orange-500 rounded-full"></div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Payment Processing</h2>
+              <h2 className="text-2xl font-bold text-foreground">Payment Processing</h2>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -293,7 +312,7 @@ export default function StatusPage() {
             <div className="flex items-center mb-8">
               <div className="flex items-center space-x-3">
                 <div className="w-1 h-8 bg-gradient-to-b from-red-500 to-pink-500 rounded-full"></div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Recent Incidents</h2>
+                <h2 className="text-2xl font-bold text-foreground">Recent Incidents</h2>
               </div>
             </div>
             <div className="space-y-4">
@@ -307,34 +326,34 @@ export default function StatusPage() {
         {/* Performance Metrics */}
         <div className="mb-12">
           <div className="glass-card dark:glass-card-dark rounded-2xl p-8">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-              <TrendingUp className="w-5 h-5 mr-2 text-blue-600" />
+            <h3 className="text-xl font-bold text-foreground mb-6 flex items-center">
+              <TrendingUp className="w-5 h-5 mr-2 text-primary" />
               Performance Metrics
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <div className="text-center p-4 bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl border border-white/20 dark:border-white/10">
+              <div className="text-center p-4 rounded-xl glass-card dark:glass-card-dark">
                 <div className="text-2xl font-bold text-green-600">
                   {services.length > 0 ? Math.round((operationalCount / totalServices) * 100) : 0}%
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Service Uptime</div>
+                <div className="text-sm text-muted-foreground">Service Uptime</div>
               </div>
-              <div className="text-center p-4 bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl border border-white/20 dark:border-white/10">
-                <div className="text-2xl font-bold text-blue-600">
+              <div className="text-center p-4 rounded-xl glass-card dark:glass-card-dark">
+                <div className="text-2xl font-bold text-primary">
                   {services.length > 0 
                     ? Math.round(services.reduce((acc, s) => acc + (s.responseTime || 0), 0) / services.filter(s => s.responseTime).length) || 0
                     : 0}ms
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Avg Response</div>
+                <div className="text-sm text-muted-foreground">Avg Response</div>
               </div>
-              <div className="text-center p-4 bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl border border-white/20 dark:border-white/10">
-                <div className="text-2xl font-bold text-purple-600">{operationalCount}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Operational</div>
+              <div className="text-center p-4 rounded-xl glass-card dark:glass-card-dark">
+                <div className="text-2xl font-bold text-primary">{operationalCount}</div>
+                <div className="text-sm text-muted-foreground">Operational</div>
               </div>
-              <div className="text-center p-4 bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-xl border border-white/20 dark:border-white/10">
+              <div className="text-center p-4 rounded-xl glass-card dark:glass-card-dark">
                 <div className="text-2xl font-bold text-orange-600">
                   {totalServices - operationalCount}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Issues</div>
+                <div className="text-sm text-muted-foreground">Issues</div>
               </div>
             </div>
           </div>
@@ -342,14 +361,14 @@ export default function StatusPage() {
 
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-white/20 dark:border-white/10">
-          <div className="text-center backdrop-blur-sm bg-white/5 dark:bg-black/5 rounded-2xl p-6 border border-white/10 dark:border-white/5">
+          <div className="text-center glass-card dark:glass-card-dark rounded-2xl p-6">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <Shield className="w-5 h-5 text-blue-600" />
-              <span className="text-sm text-gray-600 dark:text-gray-400">Status page powered by LicenseChain</span>
+              <Shield className="w-5 h-5 text-primary" />
+              <span className="text-sm text-muted-foreground">Status page powered by LicenseChain</span>
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-500">
+            <p className="text-sm text-muted-foreground">
               For real-time updates, follow{' '}
-              <a href="https://x.com/licensechainapp" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
+              <a href="https://x.com/licensechainapp" className="text-primary hover:text-primary/80 font-medium transition-colors">
                 @licensechainapp
               </a>{' '}
               on X

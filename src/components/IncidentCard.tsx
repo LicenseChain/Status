@@ -85,19 +85,19 @@ export function IncidentCard({ incident }: IncidentCardProps) {
 
       {/* Content */}
       <div className="p-6">
-        <p className="text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
+        <p className="text-muted-foreground mb-6 leading-relaxed">
           {incident.description}
         </p>
         
         {/* Details */}
         <div className="space-y-4">
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Affected Services</h4>
+            <h4 className="text-sm font-semibold text-foreground mb-2">Affected Services</h4>
             <div className="flex flex-wrap gap-2">
               {incident.affectedServices.map((service, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 backdrop-blur-sm bg-white/20 dark:bg-black/20 text-gray-700 dark:text-gray-200 rounded-full text-sm border border-white/30 dark:border-white/10 shadow-sm"
+                  className="px-3 py-1 glass-card dark:glass-card-dark text-foreground rounded-full text-sm"
                 >
                   {service}
                 </span>
@@ -106,13 +106,13 @@ export function IncidentCard({ incident }: IncidentCardProps) {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-3 rounded-lg bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Created</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-300">{incident.createdAt}</p>
+            <div className="p-3 rounded-lg glass-card dark:glass-card-dark">
+              <h4 className="text-sm font-semibold text-foreground mb-1">Created</h4>
+              <p className="text-sm text-muted-foreground">{incident.createdAt}</p>
             </div>
-            <div className="p-3 rounded-lg bg-white/10 dark:bg-black/10 backdrop-blur-sm border border-white/20 dark:border-white/10">
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Last Updated</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-300">{incident.updatedAt}</p>
+            <div className="p-3 rounded-lg glass-card dark:glass-card-dark">
+              <h4 className="text-sm font-semibold text-foreground mb-1">Last Updated</h4>
+              <p className="text-sm text-muted-foreground">{incident.updatedAt}</p>
             </div>
           </div>
         </div>
