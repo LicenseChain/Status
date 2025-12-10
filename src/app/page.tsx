@@ -33,17 +33,7 @@ export default function StatusPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const [incidents, setIncidents] = useState<Incident[]>([
-    {
-      id: 'inc-001',
-      title: 'Scheduled Maintenance - API Service',
-      status: 'resolved',
-      description: 'We performed scheduled maintenance on our API infrastructure to improve performance and reliability.',
-      createdAt: '2024-01-15 02:00 UTC',
-      updatedAt: '2024-01-15 04:00 UTC',
-      affectedServices: ['API Service', 'Dashboard']
-    }
-  ])
+  const [incidents, setIncidents] = useState<Incident[]>([])
 
   const [lastUpdated, setLastUpdated] = useState<string>('')
   const [isRefreshing, setIsRefreshing] = useState(false)
@@ -88,11 +78,55 @@ export default function StatusPage() {
     }
   }
 
+  const fetchIncidents = async () => {
+    try {
+      const response = await fetch('/api/incidents?limit=10')
+      if (!response.ok) {
+        throw new Error('Failed to fetch incidents')
+      }
+      
+      const data = await response.json()
+      if (data.success) {
+        setIncidents(data.incidents.map((incident: any) => ({
+          id: incident.id,
+          title: incident.title,
+          status: incident.status,
+          description: incident.description,
+          createdAt: new Date(incident.createdAt).toLocaleString('en-US', {
+            timeZone: 'UTC',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZoneName: 'short'
+          }),
+          updatedAt: new Date(incident.updatedAt).toLocaleString('en-US', {
+            timeZone: 'UTC',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZoneName: 'short'
+          }),
+          affectedServices: incident.affectedServices
+        })))
+      }
+    } catch (err) {
+      console.error('Error fetching incidents:', err)
+    }
+  }
+
   useEffect(() => {
     fetchStatusData()
+    fetchIncidents()
     
     // Set up auto-refresh every 30 seconds
-    const interval = setInterval(fetchStatusData, 30000)
+    const interval = setInterval(() => {
+      fetchStatusData()
+      fetchIncidents()
+    }, 30000)
     return () => clearInterval(interval)
   }, [])
 
@@ -353,7 +387,7 @@ export default function StatusPage() {
           <div className="text-center glass-card dark:glass-card-dark rounded-2xl p-6">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Shield className="w-5 h-5 text-primary" />
-              <span className="text-sm text-slate-600 dark:text-gray-300">Status page powered by LicenseChain</span>
+              <span className="text-sm text-slate-600 dark:text-gray-300">Status page powered by LicenseChain LLC</span>
             </div>
             <p className="text-sm text-slate-600 dark:text-gray-300">
               For real-time updates, follow{' '}

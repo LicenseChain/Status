@@ -1,0 +1,29 @@
+// Prisma Schema for Status Page
+// This schema is shared with the API and Dashboard repositories
+// IMPORTANT: All repos use the same DATABASE_URL and this unified schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Incidents for status page
+model Incident {
+  id              String   @id @default(cuid())
+  title           String   @db.VarChar(500)
+  description     String   @db.Text
+  status          String   @default("investigating") @db.VarChar(50) // investigating, identified, monitoring, resolved
+  affectedServices String[] // Array of affected service names
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  resolvedAt      DateTime?
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("incidents")
+}
+

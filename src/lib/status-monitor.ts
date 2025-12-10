@@ -50,7 +50,7 @@ const serviceChecks: ServiceCheck[] = [
 // In production, this should point to your webhook health endpoint
 const cryptoWebhookCheck: ServiceCheck = {
   name: 'Crypto Processing',
-  url: process.env.CRYPTO_WEBHOOK_HEALTH_URL || process.env.NEXT_PUBLIC_WEBHOOK_HEALTH_URL || 'https://api.licensechain.app/webhooks/health',
+  url: process.env.CRYPTO_WEBHOOK_HEALTH_URL || process.env.NEXT_PUBLIC_CRYPTO_WEBHOOK_HEALTH_URL || 'https://api.licensechain.app/v1/webhooks/crypto/health',
   timeout: 10000,
   expectedStatus: 200
 }
@@ -58,7 +58,7 @@ const cryptoWebhookCheck: ServiceCheck = {
 // Webhook endpoint for Stripe payment processing
 const stripeWebhookCheck: ServiceCheck = {
   name: 'Stripe Processing',
-  url: process.env.STRIPE_WEBHOOK_HEALTH_URL || process.env.NEXT_PUBLIC_STRIPE_WEBHOOK_HEALTH_URL || 'https://api.licensechain.app/webhooks/stripe/health',
+  url: process.env.STRIPE_WEBHOOK_HEALTH_URL || process.env.NEXT_PUBLIC_STRIPE_WEBHOOK_HEALTH_URL || 'https://api.licensechain.app/v1/stripe/webhook/health',
   timeout: 10000,
   expectedStatus: 200
 }
@@ -94,40 +94,59 @@ export async function checkServiceStatus(service: ServiceCheck): Promise<Partial
     clearTimeout(timeoutId)
     const responseTime = Date.now() - startTime
     
+    const now = new Date()
+    const lastCheckedFormatted = now.toLocaleString('en-US', {
+      timeZone: 'UTC',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZoneName: 'short'
+    })
+
     if (response.ok) {
       return {
         status: 'operational',
         responseTime,
-        lastChecked: 'Just now'
+        lastChecked: lastCheckedFormatted
       }
     } else if (response.status >= 500) {
       return {
         status: 'outage',
         responseTime,
-        lastChecked: 'Just now'
+        lastChecked: lastCheckedFormatted
       }
     } else {
       return {
         status: 'degraded',
         responseTime,
-        lastChecked: 'Just now'
+        lastChecked: lastCheckedFormatted
       }
     }
   } catch (error) {
     const responseTime = Date.now() - startTime
+    const now = new Date()
+    const lastCheckedFormatted = now.toLocaleString('en-US', {
+      timeZone: 'UTC',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZoneName: 'short'
+    })
     
     if (error instanceof Error && error.name === 'AbortError') {
       return {
         status: 'outage',
         responseTime,
-        lastChecked: 'Just now'
+        lastChecked: lastCheckedFormatted
       }
     }
     
     return {
       status: 'outage',
       responseTime,
-      lastChecked: 'Just now'
+      lastChecked: lastCheckedFormatted
     }
   }
 }
@@ -248,7 +267,14 @@ function getServiceConfig(name: string): Omit<ServiceStatus, 'icon'> {
       category: 'core',
       uptime: '99.9%',
       status: 'operational',
-      lastChecked: 'Just now'
+      lastChecked: new Date().toLocaleString('en-US', {
+        timeZone: 'UTC',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short'
+      })
     },
     'Website': {
       name: 'Website',
@@ -256,7 +282,14 @@ function getServiceConfig(name: string): Omit<ServiceStatus, 'icon'> {
       category: 'infrastructure',
       uptime: '99.8%',
       status: 'operational',
-      lastChecked: 'Just now'
+      lastChecked: new Date().toLocaleString('en-US', {
+        timeZone: 'UTC',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short'
+      })
     },
     'Documentation': {
       name: 'Documentation',
@@ -264,7 +297,14 @@ function getServiceConfig(name: string): Omit<ServiceStatus, 'icon'> {
       category: 'infrastructure',
       uptime: '99.7%',
       status: 'operational',
-      lastChecked: 'Just now'
+      lastChecked: new Date().toLocaleString('en-US', {
+        timeZone: 'UTC',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short'
+      })
     },
     'Dashboard': {
       name: 'Dashboard',
@@ -272,7 +312,14 @@ function getServiceConfig(name: string): Omit<ServiceStatus, 'icon'> {
       category: 'core',
       uptime: '99.6%',
       status: 'operational',
-      lastChecked: 'Just now'
+      lastChecked: new Date().toLocaleString('en-US', {
+        timeZone: 'UTC',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short'
+      })
     },
     'Authentication': {
       name: 'Authentication',
@@ -280,7 +327,14 @@ function getServiceConfig(name: string): Omit<ServiceStatus, 'icon'> {
       category: 'core',
       uptime: '99.9%',
       status: 'operational',
-      lastChecked: 'Just now'
+      lastChecked: new Date().toLocaleString('en-US', {
+        timeZone: 'UTC',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short'
+      })
     },
     'Crypto Processing': {
       name: 'Crypto Processing',
@@ -288,7 +342,14 @@ function getServiceConfig(name: string): Omit<ServiceStatus, 'icon'> {
       category: 'payment',
       uptime: '99.7%',
       status: 'operational',
-      lastChecked: 'Just now'
+      lastChecked: new Date().toLocaleString('en-US', {
+        timeZone: 'UTC',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short'
+      })
     },
     'Stripe Processing': {
       name: 'Stripe Processing',
@@ -296,7 +357,14 @@ function getServiceConfig(name: string): Omit<ServiceStatus, 'icon'> {
       category: 'payment',
       uptime: '99.5%',
       status: 'operational',
-      lastChecked: 'Just now'
+      lastChecked: new Date().toLocaleString('en-US', {
+        timeZone: 'UTC',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short'
+      })
     }
   }
   
