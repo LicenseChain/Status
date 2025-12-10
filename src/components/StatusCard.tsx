@@ -88,24 +88,24 @@ export function StatusCard({ service }: StatusCardProps) {
 
       {/* Content */}
       <div className="p-6">
-        <p className="text-muted-foreground mb-6 leading-relaxed">
+        <p className="text-slate-700 dark:text-gray-200 mb-6 leading-relaxed">
           {service.description}
         </p>
         
         {/* Metrics */}
         <div className="space-y-3">
-          <div className="flex items-center justify-between text-sm p-2 rounded-lg glass-card dark:glass-card-dark">
-            <span className="text-muted-foreground">Last checked</span>
-            <span className="font-medium text-foreground">{service.lastChecked}</span>
+          <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
+            <span className="text-slate-600 dark:text-gray-300">Last checked</span>
+            <span className="font-medium text-slate-900 dark:text-white">{service.lastChecked}</span>
           </div>
           {service.responseTime && (
-            <div className="flex items-center justify-between text-sm p-2 rounded-lg glass-card dark:glass-card-dark">
-              <span className="text-muted-foreground">Response time</span>
-              <span className="font-medium text-foreground">{service.responseTime}ms</span>
+            <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
+              <span className="text-slate-600 dark:text-gray-300">Response time</span>
+              <span className="font-medium text-slate-900 dark:text-white">{service.responseTime}ms</span>
             </div>
           )}
-          <div className="flex items-center justify-between text-sm p-2 rounded-lg glass-card dark:glass-card-dark">
-            <span className="text-muted-foreground">Uptime</span>
+          <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
+            <span className="text-slate-600 dark:text-gray-300">Uptime</span>
             <span className="font-medium text-green-600 dark:text-green-400">{service.uptime}</span>
           </div>
         </div>
