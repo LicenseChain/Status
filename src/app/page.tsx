@@ -201,18 +201,6 @@ export default function StatusPage() {
       />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-0">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-6 animate-pulse shadow-lg">
-            <Shield className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">
-            <span className="gradient-text">System Status</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-delay">
-            Real-time monitoring of all LicenseChain services and infrastructure
-          </p>
-        </div>
 
         {/* Overall Status Card */}
         <div className="mb-12">

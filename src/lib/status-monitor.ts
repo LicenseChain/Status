@@ -164,7 +164,7 @@ function getServiceConfig(name: string): Omit<ServiceStatus, 'icon'> {
     },
     'Website': {
       name: 'Website',
-      description: 'Main LicenseChain website and marketing pages',
+      description: 'LicenseChain website and marketing pages',
       category: 'infrastructure',
       uptime: '99.8%',
       status: 'operational',
