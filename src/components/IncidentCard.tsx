@@ -92,12 +92,12 @@ export function IncidentCard({ incident }: IncidentCardProps) {
         {/* Details */}
         <div className="space-y-4">
           <div>
-            <h4 className="text-sm font-semibold text-foreground mb-2">Affected Services</h4>
+            <h4 className="text-sm font-semibold text-white mb-2">Affected Services</h4>
             <div className="flex flex-wrap gap-2">
               {incident.affectedServices.map((service, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 glass-card dark:glass-card-dark text-foreground rounded-full text-sm"
+                  className="px-3 py-1 text-muted-foreground dark:glass-card-dark rounded-full text-sm"
                 >
                   {service}
                 </span>
