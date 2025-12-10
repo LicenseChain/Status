@@ -88,7 +88,7 @@ export function StatusCard({ service }: StatusCardProps) {
 
       {/* Content */}
       <div className="p-6">
-        <p className="text-slate-700 dark:text-gray-200 mb-6 leading-relaxed">
+        <p className="text-muted-foreground mb-6 leading-relaxed">
           {service.description}
         </p>
         

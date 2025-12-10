@@ -107,11 +107,11 @@ export function IncidentCard({ incident }: IncidentCardProps) {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-3 rounded-lg glass-card dark:glass-card-dark">
-              <h4 className="text-sm font-semibold text-foreground mb-1">Created</h4>
+              <h4 className="text-sm font-semibold text-white mb-1">Created</h4>
               <p className="text-sm text-muted-foreground">{incident.createdAt}</p>
             </div>
             <div className="p-3 rounded-lg glass-card dark:glass-card-dark">
-              <h4 className="text-sm font-semibold text-foreground mb-1">Last Updated</h4>
+              <h4 className="text-sm font-semibold text-white mb-1">Last Updated</h4>
               <p className="text-sm text-muted-foreground">{incident.updatedAt}</p>
             </div>
           </div>
