@@ -5,11 +5,13 @@
   "description": "LicenseChain Status Page",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "deploy": "npm run build && echo Build complete! Deploy the 'out' directory to your hosting provider.",
-    "deploy:vercel": "npm run build && vercel --prod"
+    "deploy:vercel": "npm run build && vercel --prod",
+    "prisma:generate": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

@@ -1,34 +1,43 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { PrismaClient } from '@prisma/client'
 
-// Note: Prisma client generation is not available in this environment.
-// To keep the status page buildable on Vercel, we return mock data here.
-const mockIncidents = [
-  {
-    id: 'inc-001',
-    title: 'Scheduled Maintenance - API Service',
-    description:
-      'We performed scheduled maintenance on our API infrastructure to improve performance and reliability.',
-    status: 'resolved',
-    affectedServices: ['API Service', 'Dashboard'],
-    createdAt: '2024-01-15T02:00:00.000Z',
-    updatedAt: '2024-01-15T04:00:00.000Z',
-    resolvedAt: '2024-01-15T04:00:00.000Z',
-  },
-]
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL
+    }
+  }
+})
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
+    const limit = parseInt(searchParams.get('limit') || '50')
     const status = searchParams.get('status')
-    const limit = parseInt(searchParams.get('limit') || '50', 10)
 
-    const incidents = mockIncidents
-      .filter((incident) => (status ? incident.status === status : true))
-      .slice(0, limit)
+    const where: any = {}
+    if (status) {
+      where.status = status
+    }
+
+    const incidents = await prisma.incident.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+      take: limit
+    })
 
     return NextResponse.json({
       success: true,
-      incidents,
+      incidents: incidents.map(incident => ({
+        id: incident.id,
+        title: incident.title,
+        description: incident.description,
+        status: incident.status,
+        affectedServices: incident.affectedServices,
+        createdAt: incident.createdAt.toISOString(),
+        updatedAt: incident.updatedAt.toISOString(),
+        resolvedAt: incident.resolvedAt?.toISOString()
+      }))
     })
   } catch (error) {
     console.error('Failed to fetch incidents:', error)
