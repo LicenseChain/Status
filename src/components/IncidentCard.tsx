@@ -85,19 +85,19 @@ export function IncidentCard({ incident }: IncidentCardProps) {
 
       {/* Content */}
       <div className="p-6">
-        <p className="text-muted-foreground mb-6 leading-relaxed">
+        <p className="text-white/90 mb-6 leading-relaxed">
           {incident.description}
         </p>
         
         {/* Details */}
         <div className="space-y-4">
           <div>
-            <h4 className="text-sm font-semibold text-foreground mb-2">Affected Services</h4>
+            <h4 className="text-sm font-semibold text-white mb-2">Affected Services</h4>
             <div className="flex flex-wrap gap-2">
               {incident.affectedServices.map((service, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 glass-card dark:glass-card-dark text-foreground rounded-full text-sm"
+                  className="px-3 py-1 glass-card dark:glass-card-dark text-muted-foreground rounded-full text-sm"
                 >
                   {service}
                 </span>
@@ -107,11 +107,11 @@ export function IncidentCard({ incident }: IncidentCardProps) {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-3 rounded-lg glass-card dark:glass-card-dark">
-              <h4 className="text-sm font-semibold text-foreground mb-1">Created</h4>
+              <h4 className="text-sm font-semibold text-white mb-1">Created</h4>
               <p className="text-sm text-muted-foreground">{incident.createdAt}</p>
             </div>
             <div className="p-3 rounded-lg glass-card dark:glass-card-dark">
-              <h4 className="text-sm font-semibold text-foreground mb-1">Last Updated</h4>
+              <h4 className="text-sm font-semibold text-white mb-1">Last Updated</h4>
               <p className="text-sm text-muted-foreground">{incident.updatedAt}</p>
             </div>
           </div>

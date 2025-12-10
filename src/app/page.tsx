@@ -228,16 +228,16 @@ export default function StatusPage() {
             <div className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
-                  <div className="text-2xl font-bold text-slate-900 dark:text-white">{operationalCount}</div>
-                  <div className="text-sm text-slate-600 dark:text-gray-300">Operational Services</div>
+                  <div className="text-2xl font-bold text-white">{operationalCount}</div>
+                  <div className="text-sm text-white/80">Operational Services</div>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
-                  <div className="text-2xl font-bold text-slate-900 dark:text-white">0</div>
-                  <div className="text-sm text-slate-600 dark:text-gray-300">Active Incidents</div>
+                  <div className="text-2xl font-bold text-white">0</div>
+                  <div className="text-sm text-white/80">Active Incidents</div>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
-                  <div className="text-2xl font-bold text-slate-900 dark:text-white">45ms</div>
-                  <div className="text-sm text-slate-600 dark:text-gray-300">Avg Response Time</div>
+                  <div className="text-2xl font-bold text-white">45ms</div>
+                  <div className="text-sm text-white/80">Avg Response Time</div>
                 </div>
               </div>
             </div>
@@ -250,7 +250,7 @@ export default function StatusPage() {
             <div className="flex items-center mb-8">
               <div className="flex items-center space-x-3">
                 <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Core Services</h2>
+                <h2 className="text-2xl font-bold text-white">Core Services</h2>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -267,7 +267,7 @@ export default function StatusPage() {
             <div className="flex items-center mb-8">
               <div className="flex items-center space-x-3">
                 <div className="w-1 h-8 bg-gradient-to-b from-green-500 to-teal-500 rounded-full"></div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Infrastructure</h2>
+                <h2 className="text-2xl font-bold text-white">Infrastructure</h2>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -284,7 +284,7 @@ export default function StatusPage() {
             <div className="flex items-center mb-8">
               <div className="flex items-center space-x-3">
                 <div className="w-1 h-8 bg-gradient-to-b from-yellow-500 to-orange-500 rounded-full"></div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Payment Processing</h2>
+                <h2 className="text-2xl font-bold text-white">Payment Processing</h2>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -301,7 +301,7 @@ export default function StatusPage() {
             <div className="flex items-center mb-8">
               <div className="flex items-center space-x-3">
                 <div className="w-1 h-8 bg-gradient-to-b from-red-500 to-pink-500 rounded-full"></div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Recent Incidents</h2>
+                <h2 className="text-2xl font-bold text-white">Recent Incidents</h2>
               </div>
             </div>
             <div className="space-y-4">
@@ -315,7 +315,7 @@ export default function StatusPage() {
         {/* Performance Metrics */}
         <div className="mb-12">
           <div className="glass-card dark:glass-card-dark rounded-2xl p-8">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
+            <h3 className="text-xl font-bold text-white mb-6 flex items-center">
               <TrendingUp className="w-5 h-5 mr-2 text-primary" />
               Performance Metrics
             </h3>
