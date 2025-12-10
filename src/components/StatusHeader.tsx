@@ -14,7 +14,7 @@ interface StatusHeaderProps {
 export function StatusHeader({ lastUpdated, onRefresh, isRefreshing, isDarkMode, onToggleDarkMode }: StatusHeaderProps) {
   return (
     <div className={cn(
-      "sticky top-0 z-50 w-full glass border-b border-white/20 dark:border-white/10 shadow-lg"
+      "relative z-50 w-full glass border-b border-white/20 dark:border-white/10 shadow-lg"
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">

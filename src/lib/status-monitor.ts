@@ -204,7 +204,7 @@ export async function getAllServiceStatuses(): Promise<ServiceStatus[]> {
     // Try a simple connectivity check
     try {
       const fallbackCheck = await checkServiceStatus({
-        name: 'Stripe Processing',
+        name: 'Fiat Processing',
         url: 'https://api.licensechain.app/health',
         timeout: 5000,
         expectedStatus: 200
