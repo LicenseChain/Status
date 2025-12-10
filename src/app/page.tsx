@@ -235,7 +235,7 @@ export default function StatusPage() {
         onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
       />
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-0">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24 relative z-0">
 
         {/* Overall Status Card */}
         <div className="mb-12">
