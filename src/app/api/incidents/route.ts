@@ -1,13 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL
-    }
-  }
-})
+import db from '@/lib/db'
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,7 +12,7 @@ export async function GET(request: NextRequest) {
       where.status = status
     }
 
-    const incidents = await prisma.incident.findMany({
+    const incidents = await db.incident.findMany({
       where,
       orderBy: { createdAt: 'desc' },
       take: limit
