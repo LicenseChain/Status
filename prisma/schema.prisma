@@ -33,6 +33,12 @@ model User {
   notificationPush Boolean? @default(false) // Push notification preference
   notificationWeekly Boolean? @default(true) // Weekly report preference
   theme           String    @default("system") @db.VarChar(20) // system, light, dark
+  company         String?   @db.VarChar(200) // Company name
+  twoFactorSecret String?   // 2FA secret key
+  twoFactorEnabled Boolean  @default(false) // 2FA enabled flag
+  twoFactorBackupCodes String? // 2FA backup codes (JSON array)
+  trialStartDate  DateTime? // Pro Plan free trial start date
+  trialEndDate    DateTime? // Pro Plan free trial end date
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 
