@@ -284,7 +284,7 @@ export default function StatusPage() {
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
                   <div className="text-2xl font-bold text-slate-900 dark:text-white">
-                    {metrics?.avgResponseTime !== null && metrics?.avgResponseTime !== undefined
+                    {metrics && metrics.avgResponseTime !== null && metrics.avgResponseTime !== undefined
                       ? `${metrics.avgResponseTime}ms`
                       : 'N/A'}
                   </div>
