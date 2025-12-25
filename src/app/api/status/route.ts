@@ -6,6 +6,16 @@ export async function GET() {
     // Fetch all services from database
     const dbServices = await db.serviceStatus.findMany({
       orderBy: { serviceName: 'asc' },
+      select: {
+        id: true,
+        serviceName: true,
+        url: true,
+        status: true,
+        responseTime: true,
+        lastChecked: true,
+        uptime: true,
+        category: true,
+      },
     })
 
     // Map database services to frontend format
