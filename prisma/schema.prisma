@@ -558,7 +558,8 @@ model Incident {
 // Service Status Monitoring
 model ServiceStatus {
   id              String   @id @default(cuid())
-  serviceName     String   @db.VarChar(200)
+  serviceName     String   @unique @db.VarChar(200)
+  url             String?  @db.VarChar(500)
   status          String   @db.VarChar(50) // operational, degraded, outage, maintenance
   responseTime    Int?     // milliseconds
   lastChecked     DateTime @default(now())
@@ -567,7 +568,6 @@ model ServiceStatus {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  @@unique([serviceName])
   @@index([serviceName])
   @@index([status])
   @@index([category])

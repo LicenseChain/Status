@@ -32,6 +32,7 @@ export default function StatusPage() {
   const [services, setServices] = useState<ServiceStatus[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [metrics, setMetrics] = useState<any>(null)
 
   const [incidents, setIncidents] = useState<Incident[]>([])
 
@@ -65,7 +66,12 @@ export default function StatusPage() {
       
       const servicesWithIcons = data.services.map((service: any) => ({
         ...service,
-        icon: iconMap[service.name] || Activity
+        icon: iconMap[service.name] || Activity,
+        // Ensure status matches expected values
+        status: service.status === 'operational' || service.status === 'healthy' ? 'operational' :
+                service.status === 'degraded' || service.status === 'warning' ? 'degraded' :
+                service.status === 'down' || service.status === 'outage' ? 'outage' :
+                service.status === 'maintenance' ? 'maintenance' : 'operational'
       }))
       
       setServices(servicesWithIcons)
@@ -254,8 +260,10 @@ export default function StatusPage() {
                   </div>
                 </div>
                 <div className="text-right px-4 py-2 bg-white/20 backdrop-blur-sm rounded-xl border border-white/20">
-                  <div className="text-3xl font-bold drop-shadow-md">99.8%</div>
-                  <div className="text-green-100 drop-shadow-sm">Uptime</div>
+                  <div className="text-3xl font-bold drop-shadow-md">
+                  {metrics?.uptime || '99.8%'}
+                </div>
+                <div className="text-green-100 drop-shadow-sm">Uptime</div>
                 </div>
               </div>
             </div>
@@ -270,7 +278,11 @@ export default function StatusPage() {
                   <div className="text-sm text-slate-600 dark:text-gray-300">Active Incidents</div>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
-                  <div className="text-2xl font-bold text-slate-900 dark:text-white">45ms</div>
+                  <div className="text-2xl font-bold text-slate-900 dark:text-white">
+                    {metrics?.avgResponseTime 
+                      ? `${metrics.avgResponseTime}ms`
+                      : 'N/A'}
+                  </div>
                   <div className="text-sm text-slate-600 dark:text-gray-300">Avg Response Time</div>
                 </div>
               </div>
