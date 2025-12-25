@@ -72,11 +72,11 @@ export async function GET() {
     const operationalCount = services.filter(s => s.status === 'operational').length
     const totalServices = services.length
     
-    // Calculate average response time
-    const servicesWithResponseTime = services.filter(s => s.responseTime)
-    const avgResponseTime = servicesWithResponseTime.length > 0
-      ? Math.round(servicesWithResponseTime.reduce((acc, s) => acc + (s.responseTime || 0), 0) / servicesWithResponseTime.length)
-      : 0
+    // Calculate average response time from database services (before mapping)
+    const dbServicesWithResponseTime = dbServices.filter(s => s.responseTime !== null && s.responseTime !== undefined)
+    const avgResponseTime = dbServicesWithResponseTime.length > 0
+      ? Math.round(dbServicesWithResponseTime.reduce((acc, s) => acc + (s.responseTime || 0), 0) / dbServicesWithResponseTime.length)
+      : null
 
     // Calculate average uptime
     const avgUptime = services.length > 0
