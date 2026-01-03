@@ -23,7 +23,7 @@ export function StatusHeader({ lastUpdated, onRefresh, isRefreshing, isDarkMode,
               <Shield className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold brand-gradient">LicenseChain Status</h1>
+              <h1 className="text-xl font-bold brand-gradient">LicenseChain</h1>
             </div>
           </div>
           
