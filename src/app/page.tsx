@@ -404,7 +404,7 @@ export default function StatusPage() {
           <div className="text-center glass-card dark:glass-card-dark rounded-2xl p-6">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Shield className="w-5 h-5 text-primary" />
-              <span className="text-sm text-slate-600 dark:text-gray-300">Status page powered by LicenseChain</span>
+              <span className="text-sm text-slate-600 dark:text-gray-300">Powered by LicenseChain LLC</span>
             </div>
             <p className="text-sm text-slate-600 dark:text-gray-300">
               For real-time updates, follow{' '}
