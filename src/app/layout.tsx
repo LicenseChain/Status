@@ -5,7 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 const siteUrl = 'https://status.licensechain.app'
-const defaultTitle = 'LicenseChain Status'
+const defaultTitle = 'LicenseChain - Status Monitoring'
 const defaultDescription = 'Real-time status monitoring of all LicenseChain services and infrastructure. Check service uptime, response times, and incident reports.'
 
 export const metadata: Metadata = {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    siteName: 'LicenseChain Status',
+    siteName: 'LicenseChain - Status Monitoring',
     title: defaultTitle,
     description: defaultDescription,
     images: [
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'LicenseChain Status',
+        alt: 'LicenseChain - Status Monitoring',
       },
     ],
   },
@@ -111,7 +111,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
-              name: 'LicenseChain Status',
+              name: 'LicenseChain - Status Monitoring',
               url: siteUrl,
               description: 'Real-time status monitoring of all LicenseChain services',
               publisher: {
