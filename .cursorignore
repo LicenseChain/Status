@@ -1,0 +1,3 @@
+# Allow .env.example files for AI features (override global ignore)
+!.env.example
+!.env.example.tmp
