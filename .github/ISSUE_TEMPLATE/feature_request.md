@@ -1,0 +1,44 @@
+---
+name: Feature Request
+about: Suggest an idea for the Status Page
+title: '[FEATURE] '
+labels: enhancement
+assignees: ''
+---
+
+## Feature Description
+
+A clear and concise description of the feature you'd like to see.
+
+## Problem Statement
+
+What problem does this feature solve? What use case does it address?
+
+## Proposed Solution
+
+Describe how you envision this feature working.
+
+## Use Case
+
+Describe a specific scenario where this feature would be useful.
+
+## Alternatives Considered
+
+Describe any alternative solutions or features you've considered.
+
+## Additional Context
+
+Add any other context, mockups, or examples about the feature request here.
+
+## Implementation Notes
+
+If you have ideas on how to implement this, please share them here.
+
+## Related Features
+
+- [ ] Historical uptime charts
+- [ ] Service-specific status pages
+- [ ] RSS feed for status updates
+- [ ] Email notifications for incidents
+- [ ] API endpoints for status data
+- [ ] Other (please specify)

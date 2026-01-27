@@ -1,0 +1,589 @@
+// Unified Prisma Schema for LicenseChain Ecosystem
+// This schema is shared across Website, API, and Dashboard repositories
+// IMPORTANT: All three repos use the same DATABASE_URL and this unified schema
+// DO NOT modify or delete models without coordinating across all repos
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// SHARED MODELS - Used by all repos
+// ============================================================================
+
+// Shared User Model - Used by Dashboard, API, and Website
+model User {
+  id              String    @id @default(cuid())
+  name            String?
+  email           String?   @unique
+  emailVerified   DateTime?
+  image           String?
+  role            String    @default("USER") @db.VarChar(50) // USER, ADMIN, SELLER, CUSTOMER
+  tier            String    @default("free") @db.VarChar(50) // free, pro, business
+  password        String?   @db.Text // Hashed password for credentials auth
+  isActive        Boolean   @default(true)
+  stripeCustomerId String?   @db.VarChar(255)
+  notificationEmail Boolean? @default(true) // Email notification preference
+  notificationPush Boolean? @default(false) // Push notification preference
+  notificationWeekly Boolean? @default(true) // Weekly report preference
+  theme           String    @default("system") @db.VarChar(20) // system, light, dark
+  company         String?   @db.VarChar(200) // Company name
+  twoFactorSecret String?   // 2FA secret key
+  twoFactorEnabled Boolean  @default(false) // 2FA enabled flag
+  twoFactorBackupCodes String? // 2FA backup codes (JSON array)
+  trialStartDate  DateTime? // Pro Plan free trial start date
+  trialEndDate    DateTime? // Pro Plan free trial end date
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  accounts        Account[]      // NextAuth OAuth accounts (Dashboard)
+  sessions        Session[]      // NextAuth sessions (Dashboard)
+  apps            App[]          // Dashboard apps
+  licenses        License[]      // API/Dashboard licenses
+
+  @@index([email])
+  @@index([role])
+  @@index([tier])
+  @@index([isActive])
+  @@index([stripeCustomerId])
+  @@map("users")
+}
+
+// ============================================================================
+// DASHBOARD MODELS - NextAuth and Dashboard-specific
+// ============================================================================
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([sessionToken])
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// Dashboard Applications
+model App {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String   @db.VarChar(200)
+  description String?  @db.Text
+  apiKey      String   @unique @db.VarChar(255)
+  webhookUrl  String?  @db.VarChar(500)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  licenses License[]
+
+  @@index([userId])
+  @@index([apiKey])
+  @@index([active])
+  @@map("dashboard_apps")
+}
+
+// Unified License Model - Used by both API and Dashboard
+model License {
+  id                  String   @id @default(cuid())
+  appId               String?  // Dashboard: links to App
+  userId              String?  // API/Dashboard: links to User
+  productId           String?  // API: links to Product
+  licenseKey          String   @unique @db.VarChar(255)
+  email               String?  @db.VarChar(255)
+  status              String   @default("active") @db.VarChar(50) // active, suspended, expired, ACTIVE
+  expiresAt           DateTime?
+  metadata            String?  @db.Text // JSON metadata
+  price               Float?   // API: license price
+  stripePaymentIntentId String?  @db.VarChar(255) // API: Stripe payment intent ID
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  // Relations
+  user                User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  app                 App?     @relation(fields: [appId], references: [id], onDelete: SetNull)
+  product             Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([appId])
+  @@index([userId])
+  @@index([productId])
+  @@index([licenseKey])
+  @@index([status])
+  @@index([email])
+  @@index([expiresAt])
+  @@map("licenses")
+}
+
+// Dashboard API Usage Logs
+model ApiUsageLog {
+  id          String   @id @default(cuid())
+  appId       String
+  endpoint    String   @db.VarChar(200)
+  method      String   @db.VarChar(10)
+  statusCode  Int
+  responseTime Int?    // milliseconds
+  ipAddress   String?  @db.VarChar(45)
+  userAgent   String?  @db.Text
+  createdAt   DateTime @default(now())
+
+  @@index([appId])
+  @@index([createdAt])
+  @@index([endpoint])
+  @@map("dashboard_api_usage_logs")
+}
+
+// Dashboard Webhook Events
+model WebhookEvent {
+  id          String   @id @default(cuid())
+  appId       String
+  eventType   String   @db.VarChar(100)
+  payload     String   @db.Text // JSON payload
+  status      String   @db.VarChar(50) // pending, sent, failed
+  attempts    Int      @default(0)
+  lastAttempt DateTime?
+  error       String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([appId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("dashboard_webhook_events")
+}
+
+// ============================================================================
+// API MODELS - API-specific models
+// ============================================================================
+
+// API Products
+model Product {
+  id          String   @id @default(cuid())
+  name        String   @db.VarChar(200)
+  description String?  @db.Text
+  price       Float
+  currency    String   @default("USD") @db.VarChar(10)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  licenses    License[]
+
+  @@index([active])
+  @@index([createdAt])
+  @@map("api_products")
+}
+
+// API Webhooks
+model Webhook {
+  id          String   @id @default(cuid())
+  url         String   @db.VarChar(500)
+  events      String[] // Array of event types
+  secret      String   @db.VarChar(255)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  logs        WebhookLog[]
+
+  @@index([active])
+  @@index([url])
+  @@map("api_webhooks")
+}
+
+// API Webhook Logs
+model WebhookLog {
+  id          String   @id @default(cuid())
+  webhookId   String
+  eventType   String   @db.VarChar(100)
+  payload     String   @db.Text
+  status      String   @db.VarChar(50) // sent, failed
+  statusCode  Int?
+  response    String?  @db.Text
+  error       String?  @db.Text
+  attempts    Int      @default(1)
+  createdAt   DateTime @default(now())
+
+  // Relations
+  webhook     Webhook  @relation(fields: [webhookId], references: [id], onDelete: Cascade)
+
+  @@index([webhookId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("api_webhook_logs")
+}
+
+// ============================================================================
+// WEBSITE MODELS - Website-specific models
+// ============================================================================
+
+// Newsletter Subscriptions
+model NewsletterSubscription {
+  id        String   @id @default(cuid())
+  email     String   @unique @db.VarChar(255)
+  status    String   @default("active") // active, unsubscribed, bounced
+  source    String?  // blog, homepage, footer, etc.
+  ipAddress String?  @db.VarChar(45) // IPv6 compatible
+  userAgent String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  unsubscribedAt DateTime?
+
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+  @@map("newsletter_subscriptions")
+}
+
+// Contact Form Submissions
+model ContactSubmission {
+  id          String   @id @default(cuid())
+  name        String   @db.VarChar(200)
+  email       String   @db.VarChar(255)
+  company     String?  @db.VarChar(200)
+  subject     String   @db.VarChar(200)
+  message     String   @db.Text
+  inquiryType String   @default("General Inquiry") @db.VarChar(100)
+  status      String   @default("new") // new, read, replied, archived
+  ipAddress   String?  @db.VarChar(45)
+  userAgent   String?  @db.Text
+  repliedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([inquiryType])
+  @@index([createdAt])
+  @@map("contact_submissions")
+}
+
+// Blog Posts
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique @db.VarChar(255)
+  title       String   @db.VarChar(500)
+  excerpt     String?  @db.Text
+  content     String   @db.Text
+  author      String   @db.VarChar(200)
+  category    String   @db.VarChar(100)
+  image       String?  @db.VarChar(500)
+  readTime    String?  @db.VarChar(50)
+  featured    Boolean  @default(false)
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  views       Int      @default(0)
+  likes       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  comments    BlogComment[]
+
+  @@index([slug])
+  @@index([author])
+  @@index([category])
+  @@index([published, publishedAt])
+  @@index([featured])
+  @@map("blog_posts")
+}
+
+// Blog Comments
+model BlogComment {
+  id        String   @id @default(cuid())
+  postId    String
+  author    String   @db.VarChar(200)
+  email     String   @db.VarChar(255)
+  content   String   @db.Text
+  approved  Boolean  @default(false)
+  ipAddress String?  @db.VarChar(45)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  post      BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([postId])
+  @@index([approved])
+  @@index([createdAt])
+  @@map("blog_comments")
+}
+
+// Help Articles
+model HelpArticle {
+  id          String   @id @default(cuid())
+  slug        String   @db.VarChar(255)
+  categorySlug String  @db.VarChar(255)
+  title       String   @db.VarChar(500)
+  content     String   @db.Text
+  readTime    String?  @db.VarChar(50)
+  views       Int      @default(0)
+  helpful     Int      @default(0)
+  notHelpful  Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  category    HelpCategory @relation(fields: [categorySlug], references: [slug], onDelete: Cascade)
+
+  @@unique([categorySlug, slug])
+  @@index([categorySlug])
+  @@index([published])
+  @@index([views])
+  @@map("help_articles")
+}
+
+// Help Categories
+model HelpCategory {
+  slug        String   @id @db.VarChar(255)
+  title       String   @db.VarChar(200)
+  description String?  @db.Text
+  icon        String?  @db.VarChar(100) // Icon name/identifier
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  articles    HelpArticle[]
+
+  @@index([order])
+  @@index([published])
+  @@map("help_categories")
+}
+
+// Popular Help Articles (for tracking)
+model PopularHelpArticle {
+  id        String   @id @default(cuid())
+  articleId String
+  views     String   @db.VarChar(50) // e.g., "1.2k"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([articleId])
+  @@map("popular_help_articles")
+}
+
+// Career Positions
+model CareerPosition {
+  id          String   @id @default(cuid())
+  slug        String   @unique @db.VarChar(255)
+  title       String   @db.VarChar(200)
+  department  String   @db.VarChar(100)
+  location    String   @db.VarChar(200)
+  type        String   @db.VarChar(50) // Full-time, Part-time, Contract
+  remote      Boolean  @default(false)
+  description String   @db.Text
+  requirements String[] // Array of requirement strings
+  benefits    String[] // Array of benefit strings
+  salaryMin   Int?
+  salaryMax   Int?
+  currency    String?  @default("USD") @db.VarChar(10)
+  published   Boolean  @default(true)
+  featured    Boolean  @default(false)
+  views       Int      @default(0)
+  applications Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  closedAt    DateTime?
+
+  // Relations
+  applicationsList CareerApplication[]
+
+  @@index([slug])
+  @@index([department])
+  @@index([published, featured])
+  @@index([createdAt])
+  @@map("career_positions")
+}
+
+// Career Applications
+model CareerApplication {
+  id          String   @id @default(cuid())
+  positionId  String
+  firstName   String   @db.VarChar(100)
+  lastName    String   @db.VarChar(100)
+  email       String   @db.VarChar(255)
+  phone       String?  @db.VarChar(50)
+  resumeUrl   String?  @db.VarChar(500)
+  coverLetter String?  @db.Text
+  status      String   @default("pending") // pending, reviewing, interviewed, rejected, hired
+  notes       String?  @db.Text
+  ipAddress   String?  @db.VarChar(45)
+  userAgent   String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  position    CareerPosition @relation(fields: [positionId], references: [id], onDelete: Cascade)
+
+  @@index([positionId])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+  @@map("career_applications")
+}
+
+// FAQ Items
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String   @db.VarChar(500)
+  answer    String   @db.Text
+  category  String?  @db.VarChar(100)
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  views     Int      @default(0)
+  helpful   Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([published, order])
+  @@map("faqs")
+}
+
+// Analytics / Page Views
+model PageView {
+  id        String   @id @default(cuid())
+  path      String   @db.VarChar(500)
+  referrer  String?  @db.VarChar(500)
+  ipAddress String?  @db.VarChar(45)
+  userAgent String?  @db.Text
+  country   String?  @db.VarChar(2) // ISO country code
+  city      String?  @db.VarChar(100)
+  device    String?  @db.VarChar(50) // mobile, desktop, tablet
+  browser   String?  @db.VarChar(100)
+  os        String?  @db.VarChar(100)
+  createdAt DateTime @default(now())
+
+  @@index([path])
+  @@index([createdAt])
+  @@index([country])
+  @@map("page_views")
+}
+
+// Email Logs
+model EmailLog {
+  id          String   @id @default(cuid())
+  type        String   @db.VarChar(50) // newsletter, contact, welcome, etc.
+  recipient   String   @db.VarChar(255)
+  subject     String   @db.VarChar(500)
+  status      String   @db.VarChar(50) // sent, failed, bounced
+  error       String?  @db.Text
+  resendId    String?  @db.VarChar(255)
+  createdAt   DateTime @default(now())
+
+  @@index([type])
+  @@index([recipient])
+  @@index([status])
+  @@index([createdAt])
+  @@map("email_logs")
+}
+
+// Site Settings
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key        String   @unique @db.VarChar(100)
+  value      String   @db.Text
+  type       String   @default("string") @db.VarChar(50) // string, number, boolean, json
+  updatedAt  DateTime @updatedAt
+  updatedBy String?  @db.VarChar(200)
+
+  @@index([key])
+  @@map("site_settings")
+}
+
+// ============================================================================
+// STATUS PAGE MODELS - Status page and monitoring
+// ============================================================================
+
+// Incidents for status page
+model Incident {
+  id              String   @id @default(cuid())
+  title           String   @db.VarChar(500)
+  description     String   @db.Text
+  status          String   @default("investigating") @db.VarChar(50) // investigating, identified, monitoring, resolved
+  affectedServices String[] // Array of affected service names
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  resolvedAt      DateTime?
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("incidents")
+}
+
+// Service Status Monitoring
+model ServiceStatus {
+  id              String   @id @default(cuid())
+  serviceName     String   @unique @db.VarChar(200)
+  url             String?  @db.VarChar(500)
+  status          String   @db.VarChar(50) // operational, degraded, outage, maintenance
+  responseTime    Int?     // milliseconds
+  lastChecked     DateTime @default(now())
+  uptime          Float    @default(100.0) // percentage
+  category        String   @db.VarChar(50) // core, infrastructure, payment
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([serviceName])
+  @@index([status])
+  @@index([category])
+  @@index([lastChecked])
+  @@map("service_statuses")
+}
+
+// Service Status History (for uptime calculation)
+model ServiceStatusHistory {
+  id              String   @id @default(cuid())
+  serviceName     String   @db.VarChar(200)
+  status          String   @db.VarChar(50)
+  responseTime    Int?
+  checkedAt       DateTime @default(now())
+
+  @@index([serviceName, checkedAt])
+  @@index([checkedAt])
+  @@map("service_status_history")
+}

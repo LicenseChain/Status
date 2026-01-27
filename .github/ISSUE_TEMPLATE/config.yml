@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: LicenseChain Support
+    url: https://licensechain.app/support
+    about: Get help from LicenseChain support team
+  - name: LicenseChain Documentation
+    url: https://docs.licensechain.app
+    about: Check our documentation for answers
+  - name: LicenseChain Community
+    url: https://github.com/LicenseChain
+    about: Join our community discussions

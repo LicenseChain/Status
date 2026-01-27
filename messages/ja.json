@@ -1,0 +1,48 @@
+{
+  "status": {
+    "title": "LicenseChain - ステータス監視",
+    "description": "すべての LicenseChain サービスとインフラストラクチャのリアルタイムステータス監視。サービスの稼働時間、応答時間、インシデントレポートを確認します。",
+    "loading": "ステータスを読み込み中...",
+    "unavailable": "ステータス利用不可",
+    "tryAgain": "再試行",
+    "allSystemsOperational": "すべてのシステムが正常に動作しています",
+    "servicesRunningSmoothly": "{total} 個のサービスのうち {count} 個が正常に動作しています",
+    "uptime": "稼働時間",
+    "operationalServices": "動作中のサービス",
+    "activeIncidents": "アクティブなインシデント",
+    "avgResponseTime": "平均応答時間",
+    "coreServices": "コアサービス",
+    "infrastructure": "インフラストラクチャ",
+    "paymentProcessing": "決済処理",
+    "recentIncidents": "最近のインシデント",
+    "performanceMetrics": "パフォーマンス指標",
+    "serviceUptime": "サービス稼働時間",
+    "avgResponse": "平均応答",
+    "operational": "動作中",
+    "issues": "問題",
+    "poweredBy": "LicenseChain LLC 提供",
+    "followForUpdates": "リアルタイムの更新については、X で {handle} をフォローしてください",
+    "lastChecked": "最終確認",
+    "responseTime": "応答時間",
+    "uptimeLabel": "稼働時間",
+    "incidentReport": "インシデントレポート",
+    "affectedServices": "影響を受けたサービス",
+    "created": "作成日時",
+    "lastUpdated": "最終更新"
+  },
+  "serviceStatus": {
+    "operational": "正常動作",
+    "degraded": "パフォーマンス低下",
+    "outage": "サービス停止",
+    "maintenance": "メンテナンス中"
+  },
+  "incidentStatus": {
+    "investigating": "調査中",
+    "identified": "特定済み",
+    "monitoring": "監視中",
+    "resolved": "解決済み"
+  },
+  "common": {
+    "na": "N/A"
+  }
+}

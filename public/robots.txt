@@ -1,0 +1,14 @@
+# LicenseChain Status Page - robots.txt
+# Optimized for search engine crawling and indexing
+
+User-agent: *
+Allow: /
+
+# Disallow API routes from indexing
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://status.licensechain.app/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

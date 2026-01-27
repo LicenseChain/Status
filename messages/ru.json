@@ -1,0 +1,48 @@
+{
+  "status": {
+    "title": "LicenseChain - Мониторинг Статуса",
+    "description": "Мониторинг статуса всех сервисов и инфраструктуры LicenseChain в реальном времени. Проверьте время работы, время отклика и отчеты об инцидентах.",
+    "loading": "Загрузка Статуса...",
+    "unavailable": "Статус Недоступен",
+    "tryAgain": "Попробовать Снова",
+    "allSystemsOperational": "Все Системы Работают",
+    "servicesRunningSmoothly": "{count} из {total} сервисов работают нормально",
+    "uptime": "Время Работы",
+    "operationalServices": "Работающие Сервисы",
+    "activeIncidents": "Активные Инциденты",
+    "avgResponseTime": "Среднее Время Отклика",
+    "coreServices": "Основные Сервисы",
+    "infrastructure": "Инфраструктура",
+    "paymentProcessing": "Обработка Платежей",
+    "recentIncidents": "Недавние Инциденты",
+    "performanceMetrics": "Метрики Производительности",
+    "serviceUptime": "Время Работы Сервиса",
+    "avgResponse": "Средний Отклик",
+    "operational": "Работает",
+    "issues": "Проблемы",
+    "poweredBy": "Разработано LicenseChain LLC",
+    "followForUpdates": "Для обновлений в реальном времени следите за {handle} в X",
+    "lastChecked": "Последняя проверка",
+    "responseTime": "Время отклика",
+    "uptimeLabel": "время работы",
+    "incidentReport": "Отчет об Инциденте",
+    "affectedServices": "Затронутые Сервисы",
+    "created": "Создано",
+    "lastUpdated": "Последнее Обновление"
+  },
+  "serviceStatus": {
+    "operational": "Работает",
+    "degraded": "Сниженная Производительность",
+    "outage": "Сбой Сервиса",
+    "maintenance": "Обслуживание"
+  },
+  "incidentStatus": {
+    "investigating": "Расследование",
+    "identified": "Идентифицировано",
+    "monitoring": "Мониторинг",
+    "resolved": "Решено"
+  },
+  "common": {
+    "na": "N/A"
+  }
+}

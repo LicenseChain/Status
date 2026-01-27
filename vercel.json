@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "crons": [
+    {
+      "path": "/api/cron/check-status",
+      "schedule": "23 1 * * *"
+    },
+    {
+      "path": "/api/cron/check-status",
+      "schedule": "47 5 * * *"
+    },
+    {
+      "path": "/api/cron/check-status",
+      "schedule": "12 9 * * *"
+    },
+    {
+      "path": "/api/cron/check-status",
+      "schedule": "38 13 * * *"
+    },
+    {
+      "path": "/api/cron/check-status",
+      "schedule": "5 17 * * *"
+    },
+    {
+      "path": "/api/cron/check-status",
+      "schedule": "51 21 * * *"
+    }
+  ]
+}
