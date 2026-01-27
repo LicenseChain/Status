@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { AlertTriangle, Clock, CheckCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -17,13 +18,13 @@ interface IncidentCardProps {
   incident: Incident
 }
 
-const statusConfig = {
+const getStatusConfig = (t: any) => ({
   investigating: {
     icon: AlertTriangle,
     color: 'text-red-500',
     bgColor: 'bg-red-50 dark:bg-red-900/20',
     borderColor: 'border-red-200 dark:border-red-800',
-    label: 'Investigating',
+    label: t('investigating'),
     gradient: 'from-red-500 to-pink-500'
   },
   identified: {
@@ -31,7 +32,7 @@ const statusConfig = {
     color: 'text-yellow-500',
     bgColor: 'bg-yellow-50 dark:bg-yellow-900/20',
     borderColor: 'border-yellow-200 dark:border-yellow-800',
-    label: 'Identified',
+    label: t('identified'),
     gradient: 'from-yellow-500 to-orange-500'
   },
   monitoring: {
@@ -39,7 +40,7 @@ const statusConfig = {
     color: 'text-blue-500',
     bgColor: 'bg-blue-50 dark:bg-blue-900/20',
     borderColor: 'border-blue-200 dark:border-blue-800',
-    label: 'Monitoring',
+    label: t('monitoring'),
     gradient: 'from-blue-500 to-indigo-500'
   },
   resolved: {
@@ -47,12 +48,15 @@ const statusConfig = {
     color: 'text-green-500',
     bgColor: 'bg-green-50 dark:bg-green-900/20',
     borderColor: 'border-green-200 dark:border-green-800',
-    label: 'Resolved',
+    label: t('resolved'),
     gradient: 'from-green-500 to-emerald-500'
   }
-}
+})
 
 export function IncidentCard({ incident }: IncidentCardProps) {
+  const t = useTranslations('incidentStatus')
+  const tStatus = useTranslations('status')
+  const statusConfig = getStatusConfig(t)
   const config = statusConfig[incident.status]
   const Icon = config.icon
 
@@ -74,7 +78,7 @@ export function IncidentCard({ incident }: IncidentCardProps) {
             </div>
             <div>
               <h3 className="text-lg font-bold text-white drop-shadow-md">{incident.title}</h3>
-              <p className="text-white/90 text-sm drop-shadow-sm">Incident Report</p>
+              <p className="text-white/90 text-sm drop-shadow-sm">{tStatus('incidentReport')}</p>
             </div>
           </div>
           <div className="flex items-center space-x-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-lg border border-white/20">
@@ -92,7 +96,7 @@ export function IncidentCard({ incident }: IncidentCardProps) {
         {/* Details */}
         <div className="space-y-4">
           <div>
-            <h4 className="text-sm font-semibold text-white mb-2">Affected Services</h4>
+            <h4 className="text-sm font-semibold text-white mb-2">{tStatus('affectedServices')}</h4>
             <div className="flex flex-wrap gap-2">
               {incident.affectedServices.map((service, index) => (
                 <span
@@ -107,11 +111,11 @@ export function IncidentCard({ incident }: IncidentCardProps) {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-3 rounded-lg glass-card dark:glass-card-dark">
-              <h4 className="text-sm font-semibold text-white mb-1">Created</h4>
+              <h4 className="text-sm font-semibold text-white mb-1">{tStatus('created')}</h4>
               <p className="text-sm text-muted-foreground">{incident.createdAt}</p>
             </div>
             <div className="p-3 rounded-lg glass-card dark:glass-card-dark">
-              <h4 className="text-sm font-semibold text-white mb-1">Last Updated</h4>
+              <h4 className="text-sm font-semibold text-white mb-1">{tStatus('lastUpdated')}</h4>
               <p className="text-sm text-muted-foreground">{incident.updatedAt}</p>
             </div>
           </div>

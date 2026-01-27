@@ -1,0 +1,48 @@
+{
+  "status": {
+    "title": "LicenseChain - Monitoramento de Status",
+    "description": "Monitoramento em tempo real do status de todos os serviços e infraestrutura da LicenseChain. Verifique o tempo de atividade, tempos de resposta e relatórios de incidentes.",
+    "loading": "Carregando Status...",
+    "unavailable": "Status Indisponível",
+    "tryAgain": "Tentar Novamente",
+    "allSystemsOperational": "Todos os Sistemas Operacionais",
+    "servicesRunningSmoothly": "{count} de {total} serviços funcionando corretamente",
+    "uptime": "Tempo de Atividade",
+    "operationalServices": "Serviços Operacionais",
+    "activeIncidents": "Incidentes Ativos",
+    "avgResponseTime": "Tempo Médio de Resposta",
+    "coreServices": "Serviços Principais",
+    "infrastructure": "Infraestrutura",
+    "paymentProcessing": "Processamento de Pagamentos",
+    "recentIncidents": "Incidentes Recentes",
+    "performanceMetrics": "Métricas de Desempenho",
+    "serviceUptime": "Tempo de Atividade do Serviço",
+    "avgResponse": "Resposta Média",
+    "operational": "Operacional",
+    "issues": "Problemas",
+    "poweredBy": "Desenvolvido por LicenseChain LLC",
+    "followForUpdates": "Para atualizações em tempo real, siga {handle} no X",
+    "lastChecked": "Última verificação",
+    "responseTime": "Tempo de resposta",
+    "uptimeLabel": "tempo de atividade",
+    "incidentReport": "Relatório de Incidente",
+    "affectedServices": "Serviços Afetados",
+    "created": "Criado",
+    "lastUpdated": "Última Atualização"
+  },
+  "serviceStatus": {
+    "operational": "Operacional",
+    "degraded": "Desempenho Degradado",
+    "outage": "Interrupção do Serviço",
+    "maintenance": "Manutenção"
+  },
+  "incidentStatus": {
+    "investigating": "Investigando",
+    "identified": "Identificado",
+    "monitoring": "Monitorando",
+    "resolved": "Resolvido"
+  },
+  "common": {
+    "na": "N/A"
+  }
+}

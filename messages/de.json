@@ -1,0 +1,48 @@
+{
+  "status": {
+    "title": "LicenseChain - Statusüberwachung",
+    "description": "Echtzeit-Statusüberwachung aller LicenseChain-Dienste und der Infrastruktur. Überprüfen Sie die Betriebszeit, Antwortzeiten und Incident-Berichte.",
+    "loading": "Status wird geladen...",
+    "unavailable": "Status nicht verfügbar",
+    "tryAgain": "Erneut versuchen",
+    "allSystemsOperational": "Alle Systeme Betriebsbereit",
+    "servicesRunningSmoothly": "{count} von {total} Diensten laufen reibungslos",
+    "uptime": "Betriebszeit",
+    "operationalServices": "Betriebsbereite Dienste",
+    "activeIncidents": "Aktive Vorfälle",
+    "avgResponseTime": "Durchschnittliche Antwortzeit",
+    "coreServices": "Kern-Dienste",
+    "infrastructure": "Infrastruktur",
+    "paymentProcessing": "Zahlungsabwicklung",
+    "recentIncidents": "Aktuelle Vorfälle",
+    "performanceMetrics": "Leistungsmetriken",
+    "serviceUptime": "Dienst-Betriebszeit",
+    "avgResponse": "Durchschnittliche Antwort",
+    "operational": "Betriebsbereit",
+    "issues": "Probleme",
+    "poweredBy": "Betrieben von LicenseChain LLC",
+    "followForUpdates": "Für Echtzeit-Updates folgen Sie {handle} auf X",
+    "lastChecked": "Zuletzt geprüft",
+    "responseTime": "Antwortzeit",
+    "uptimeLabel": "Betriebszeit",
+    "incidentReport": "Vorfallbericht",
+    "affectedServices": "Betroffene Dienste",
+    "created": "Erstellt",
+    "lastUpdated": "Zuletzt aktualisiert"
+  },
+  "serviceStatus": {
+    "operational": "Betriebsbereit",
+    "degraded": "Verschlechterte Leistung",
+    "outage": "Dienstausfall",
+    "maintenance": "Wartung"
+  },
+  "incidentStatus": {
+    "investigating": "Untersuchen",
+    "identified": "Identifiziert",
+    "monitoring": "Überwachen",
+    "resolved": "Gelöst"
+  },
+  "common": {
+    "na": "N/A"
+  }
+}

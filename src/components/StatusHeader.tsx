@@ -12,6 +12,12 @@ interface StatusHeaderProps {
 }
 
 export function StatusHeader({ lastUpdated, onRefresh, isRefreshing, isDarkMode, onToggleDarkMode }: StatusHeaderProps) {
+  const handleToggleDarkMode = () => {
+    const newMode = !isDarkMode
+    onToggleDarkMode()
+    localStorage.setItem('theme', newMode ? 'dark' : 'light')
+  }
+
   return (
     <div className={cn(
       "fixed top-0 left-0 right-0 z-50 w-full glass border-b border-white/20 dark:border-white/10 shadow-lg"
@@ -29,8 +35,9 @@ export function StatusHeader({ lastUpdated, onRefresh, isRefreshing, isDarkMode,
           
           <div className="flex items-center space-x-6">
             <button
-              onClick={onToggleDarkMode}
+              onClick={handleToggleDarkMode}
               className="inline-flex items-center justify-center w-10 h-10 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+              aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
               {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>

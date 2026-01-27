@@ -1,0 +1,48 @@
+{
+  "status": {
+    "title": "LicenseChain - Surveillance d'État",
+    "description": "Surveillance en temps réel de l'état de tous les services et de l'infrastructure de LicenseChain. Vérifiez le temps de fonctionnement, les temps de réponse et les rapports d'incidents.",
+    "loading": "Chargement de l'État...",
+    "unavailable": "État Indisponible",
+    "tryAgain": "Réessayer",
+    "allSystemsOperational": "Tous les Systèmes Opérationnels",
+    "servicesRunningSmoothly": "{count} sur {total} services fonctionnent correctement",
+    "uptime": "Temps de Fonctionnement",
+    "operationalServices": "Services Opérationnels",
+    "activeIncidents": "Incidents Actifs",
+    "avgResponseTime": "Temps de Réponse Moyen",
+    "coreServices": "Services Principaux",
+    "infrastructure": "Infrastructure",
+    "paymentProcessing": "Traitement des Paiements",
+    "recentIncidents": "Incidents Récents",
+    "performanceMetrics": "Métriques de Performance",
+    "serviceUptime": "Temps de Fonctionnement du Service",
+    "avgResponse": "Réponse Moyenne",
+    "operational": "Opérationnel",
+    "issues": "Problèmes",
+    "poweredBy": "Propulsé par LicenseChain LLC",
+    "followForUpdates": "Pour des mises à jour en temps réel, suivez {handle} sur X",
+    "lastChecked": "Dernière vérification",
+    "responseTime": "Temps de réponse",
+    "uptimeLabel": "temps de fonctionnement",
+    "incidentReport": "Rapport d'Incident",
+    "affectedServices": "Services Affectés",
+    "created": "Créé",
+    "lastUpdated": "Dernière Mise à Jour"
+  },
+  "serviceStatus": {
+    "operational": "Opérationnel",
+    "degraded": "Performance Dégradée",
+    "outage": "Panne de Service",
+    "maintenance": "Maintenance"
+  },
+  "incidentStatus": {
+    "investigating": "En Investigation",
+    "identified": "Identifié",
+    "monitoring": "Surveillance",
+    "resolved": "Résolu"
+  },
+  "common": {
+    "na": "N/A"
+  }
+}

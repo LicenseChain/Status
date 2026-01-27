@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 import { StatusHeader } from '@/components/StatusHeader'
 import { StatusCard } from '@/components/StatusCard'
 import { IncidentCard } from '@/components/IncidentCard'
@@ -38,7 +39,11 @@ export default function StatusPage() {
 
   const [lastUpdated, setLastUpdated] = useState<string>('')
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(true)
+  const t = useTranslations('status')
+  const tService = useTranslations('serviceStatus')
+  const tIncident = useTranslations('incidentStatus')
+  const tCommon = useTranslations('common')
 
   // Fetch real-time status data
   const fetchStatusData = async () => {
@@ -83,7 +88,7 @@ export default function StatusPage() {
       updateLastUpdated()
     } catch (err) {
       console.error('Error fetching status:', err)
-      setError('Failed to load status data. Please try again.')
+      setError(t('unavailable'))
     } finally {
       setIsLoading(false)
     }
@@ -130,6 +135,19 @@ export default function StatusPage() {
   }
 
   useEffect(() => {
+    // Initialize theme from localStorage or default to dark
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme === 'light') {
+      setIsDarkMode(false)
+    } else {
+      setIsDarkMode(true)
+      if (!savedTheme) {
+        localStorage.setItem('theme', 'dark')
+      }
+    }
+  }, [])
+
+  useEffect(() => {
     fetchStatusData()
     fetchIncidents()
     
@@ -142,11 +160,16 @@ export default function StatusPage() {
   }, [])
 
   useEffect(() => {
-    // Apply dark mode class to document
+    // Apply dark mode class to document (default is dark)
     if (isDarkMode) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
+    }
+    // Set default to dark on mount
+    if (!localStorage.getItem('theme')) {
+      localStorage.setItem('theme', 'dark')
+      setIsDarkMode(true)
     }
   }, [isDarkMode])
 
@@ -193,7 +216,7 @@ export default function StatusPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-6 animate-pulse shadow-lg">
               <Shield className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-white mb-4">Loading Status...</h1>
+            <h1 className="text-2xl font-bold text-white mb-4">{t('loading')}</h1>
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
           </div>
         </div>
@@ -216,13 +239,13 @@ export default function StatusPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-red-500 rounded-2xl mb-6 shadow-lg">
               <XCircle className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-white mb-4">Status Unavailable</h1>
+            <h1 className="text-2xl font-bold text-white mb-4">{t('unavailable')}</h1>
             <p className="text-white/90 mb-6">{error}</p>
             <button
               onClick={fetchStatusData}
               className="px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-colors shadow-lg"
             >
-              Try Again
+              {t('tryAgain')}
             </button>
           </div>
         </div>
@@ -243,7 +266,11 @@ export default function StatusPage() {
         onRefresh={handleRefresh}
         isRefreshing={isRefreshing}
         isDarkMode={isDarkMode}
-        onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+        onToggleDarkMode={() => {
+          const newMode = !isDarkMode
+          setIsDarkMode(newMode)
+          localStorage.setItem('theme', newMode ? 'dark' : 'light')
+        }}
       />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24 relative z-0">
@@ -258,9 +285,9 @@ export default function StatusPage() {
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold drop-shadow-md">All Systems Operational</h2>
+                    <h2 className="text-2xl font-bold drop-shadow-md">{t('allSystemsOperational')}</h2>
                     <p className="text-green-100 text-lg drop-shadow-sm">
-                      {operationalCount} of {totalServices} services are running smoothly
+                      {t('servicesRunningSmoothly', { count: operationalCount, total: totalServices })}
                     </p>
                   </div>
                 </div>
@@ -268,7 +295,7 @@ export default function StatusPage() {
                   <div className="text-3xl font-bold drop-shadow-md">
                   {metrics?.uptime || '99.8%'}
                 </div>
-                <div className="text-green-100 drop-shadow-sm">Uptime</div>
+                <div className="text-green-100 drop-shadow-sm">{t('uptime')}</div>
                 </div>
               </div>
             </div>
@@ -276,19 +303,19 @@ export default function StatusPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
                   <div className="text-2xl font-bold text-slate-900 dark:text-white">{operationalCount}</div>
-                  <div className="text-sm text-slate-600 dark:text-gray-300">Operational Services</div>
+                  <div className="text-sm text-slate-600 dark:text-gray-300">{t('operationalServices')}</div>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
                   <div className="text-2xl font-bold text-slate-900 dark:text-white">0</div>
-                  <div className="text-sm text-slate-600 dark:text-gray-300">Active Incidents</div>
+                  <div className="text-sm text-slate-600 dark:text-gray-300">{t('activeIncidents')}</div>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
                   <div className="text-2xl font-bold text-slate-900 dark:text-white">
                     {metrics && metrics.avgResponseTime !== null && metrics.avgResponseTime !== undefined
                       ? `${metrics.avgResponseTime}ms`
-                      : 'N/A'}
+                      : tCommon('na')}
                   </div>
-                  <div className="text-sm text-slate-600 dark:text-gray-300">Avg Response Time</div>
+                  <div className="text-sm text-slate-600 dark:text-gray-300">{t('avgResponseTime')}</div>
                 </div>
               </div>
             </div>
@@ -301,7 +328,7 @@ export default function StatusPage() {
             <div className="flex items-center mb-8">
               <div className="flex items-center space-x-3">
                 <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Core Services</h2>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t('coreServices')}</h2>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -318,7 +345,7 @@ export default function StatusPage() {
             <div className="flex items-center mb-8">
               <div className="flex items-center space-x-3">
                 <div className="w-1 h-8 bg-gradient-to-b from-green-500 to-teal-500 rounded-full"></div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Infrastructure</h2>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t('infrastructure')}</h2>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -335,7 +362,7 @@ export default function StatusPage() {
             <div className="flex items-center mb-8">
               <div className="flex items-center space-x-3">
                 <div className="w-1 h-8 bg-gradient-to-b from-yellow-500 to-orange-500 rounded-full"></div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Payment Processing</h2>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t('paymentProcessing')}</h2>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -352,7 +379,7 @@ export default function StatusPage() {
             <div className="flex items-center mb-8">
               <div className="flex items-center space-x-3">
                 <div className="w-1 h-8 bg-gradient-to-b from-red-500 to-pink-500 rounded-full"></div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Recent Incidents</h2>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t('recentIncidents')}</h2>
               </div>
             </div>
             <div className="space-y-4">
@@ -368,14 +395,14 @@ export default function StatusPage() {
           <div className="glass-card dark:glass-card-dark rounded-2xl p-8">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
               <TrendingUp className="w-5 h-5 mr-2 text-primary" />
-              Performance Metrics
+              {t('performanceMetrics')}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
                 <div className="text-2xl font-bold text-green-600 dark:text-green-400">
                   {services.length > 0 ? Math.round((operationalCount / totalServices) * 100) : 0}%
                 </div>
-                <div className="text-sm text-slate-600 dark:text-gray-300">Service Uptime</div>
+                <div className="text-sm text-slate-600 dark:text-gray-300">{t('serviceUptime')}</div>
               </div>
               <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
                 <div className="text-2xl font-bold text-primary">
@@ -383,17 +410,17 @@ export default function StatusPage() {
                     ? Math.round(services.reduce((acc, s) => acc + (s.responseTime || 0), 0) / services.filter(s => s.responseTime).length) || 0
                     : 0}ms
                 </div>
-                <div className="text-sm text-slate-600 dark:text-gray-300">Avg Response</div>
+                <div className="text-sm text-slate-600 dark:text-gray-300">{t('avgResponse')}</div>
               </div>
               <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
                 <div className="text-2xl font-bold text-primary">{operationalCount}</div>
-                <div className="text-sm text-slate-600 dark:text-gray-300">Operational</div>
+                <div className="text-sm text-slate-600 dark:text-gray-300">{t('operational')}</div>
               </div>
               <div className="text-center p-4 rounded-xl bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
                 <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
                   {totalServices - operationalCount}
                 </div>
-                <div className="text-sm text-slate-600 dark:text-gray-300">Issues</div>
+                <div className="text-sm text-slate-600 dark:text-gray-300">{t('issues')}</div>
               </div>
             </div>
           </div>
@@ -404,14 +431,10 @@ export default function StatusPage() {
           <div className="text-center glass-card dark:glass-card-dark rounded-2xl p-6">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Shield className="w-5 h-5 text-primary" />
-              <span className="text-sm text-slate-600 dark:text-gray-300">Powered by LicenseChain LLC</span>
+              <span className="text-sm text-slate-600 dark:text-gray-300">{t('poweredBy')}</span>
             </div>
             <p className="text-sm text-slate-600 dark:text-gray-300">
-              For real-time updates, follow{' '}
-              <a href="https://x.com/licensechainapp" className="text-primary hover:text-primary/80 font-medium transition-colors">
-                @licensechainapp
-              </a>{' '}
-              on X
+              {t('followForUpdates', { handle: '@licensechainapp' })}
             </p>
           </div>
         </div>

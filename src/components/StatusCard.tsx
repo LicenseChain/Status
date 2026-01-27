@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { CheckCircle, XCircle, AlertCircle, Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -18,13 +19,13 @@ interface StatusCardProps {
   service: ServiceStatus
 }
 
-const statusConfig = {
+const getStatusConfig = (t: any) => ({
   operational: {
     icon: CheckCircle,
     color: 'text-green-500',
     bgColor: 'bg-green-50 dark:bg-green-900/20',
     borderColor: 'border-green-200 dark:border-green-800',
-    label: 'Operational',
+    label: t('operational'),
     gradient: 'from-green-500 to-emerald-500'
   },
   degraded: {
@@ -32,7 +33,7 @@ const statusConfig = {
     color: 'text-yellow-500',
     bgColor: 'bg-yellow-50 dark:bg-yellow-900/20',
     borderColor: 'border-yellow-200 dark:border-yellow-800',
-    label: 'Degraded Performance',
+    label: t('degraded'),
     gradient: 'from-yellow-500 to-orange-500'
   },
   outage: {
@@ -40,7 +41,7 @@ const statusConfig = {
     color: 'text-red-500',
     bgColor: 'bg-red-50 dark:bg-red-900/20',
     borderColor: 'border-red-200 dark:border-red-800',
-    label: 'Service Outage',
+    label: t('outage'),
     gradient: 'from-red-500 to-pink-500'
   },
   maintenance: {
@@ -48,12 +49,15 @@ const statusConfig = {
     color: 'text-blue-500',
     bgColor: 'bg-blue-50 dark:bg-blue-900/20',
     borderColor: 'border-blue-200 dark:border-blue-800',
-    label: 'Maintenance',
+    label: t('maintenance'),
     gradient: 'from-blue-500 to-indigo-500'
   }
-}
+})
 
 export function StatusCard({ service }: StatusCardProps) {
+  const t = useTranslations('serviceStatus')
+  const tStatus = useTranslations('status')
+  const statusConfig = getStatusConfig(t)
   const config = statusConfig[service.status]
   const StatusIcon = config.icon
   const ServiceIcon = service.icon
@@ -76,7 +80,7 @@ export function StatusCard({ service }: StatusCardProps) {
             </div>
             <div>
               <h3 className="text-lg font-bold text-white drop-shadow-md">{service.name}</h3>
-              <p className="text-white/90 text-sm drop-shadow-sm">{service.uptime} uptime</p>
+              <p className="text-white/90 text-sm drop-shadow-sm">{service.uptime} {tStatus('uptimeLabel')}</p>
             </div>
           </div>
           <div className="flex items-center space-x-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-lg border border-white/20">
@@ -95,17 +99,17 @@ export function StatusCard({ service }: StatusCardProps) {
         {/* Metrics */}
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
-            <span className="text-slate-600 dark:text-gray-300">Last checked</span>
+            <span className="text-slate-600 dark:text-gray-300">{tStatus('lastChecked')}</span>
             <span className="font-medium text-slate-900 dark:text-white">{service.lastChecked}</span>
           </div>
           {service.responseTime && (
             <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
-              <span className="text-slate-600 dark:text-gray-300">Response time</span>
+              <span className="text-slate-600 dark:text-gray-300">{tStatus('responseTime')}</span>
               <span className="font-medium text-slate-900 dark:text-white">{service.responseTime}ms</span>
             </div>
           )}
           <div className="flex items-center justify-between text-sm p-2 rounded-lg bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-white/30 dark:border-white/10">
-            <span className="text-slate-600 dark:text-gray-300">Uptime</span>
+            <span className="text-slate-600 dark:text-gray-300">{tStatus('uptime')}</span>
             <span className="font-medium text-green-600 dark:text-green-400">{service.uptime}</span>
           </div>
         </div>

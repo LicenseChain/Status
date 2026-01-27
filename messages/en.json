@@ -1,0 +1,48 @@
+{
+  "status": {
+    "title": "LicenseChain - Status Monitoring",
+    "description": "Real-time status monitoring of all LicenseChain services and infrastructure. Check service uptime, response times, and incident reports.",
+    "loading": "Loading Status...",
+    "unavailable": "Status Unavailable",
+    "tryAgain": "Try Again",
+    "allSystemsOperational": "All Systems Operational",
+    "servicesRunningSmoothly": "{count} of {total} services are running smoothly",
+    "uptime": "Uptime",
+    "operationalServices": "Operational Services",
+    "activeIncidents": "Active Incidents",
+    "avgResponseTime": "Avg Response Time",
+    "coreServices": "Core Services",
+    "infrastructure": "Infrastructure",
+    "paymentProcessing": "Payment Processing",
+    "recentIncidents": "Recent Incidents",
+    "performanceMetrics": "Performance Metrics",
+    "serviceUptime": "Service Uptime",
+    "avgResponse": "Avg Response",
+    "operational": "Operational",
+    "issues": "Issues",
+    "poweredBy": "Powered by LicenseChain LLC",
+    "followForUpdates": "For real-time updates, follow {handle} on X",
+    "lastChecked": "Last checked",
+    "responseTime": "Response time",
+    "uptimeLabel": "uptime",
+    "incidentReport": "Incident Report",
+    "affectedServices": "Affected Services",
+    "created": "Created",
+    "lastUpdated": "Last Updated"
+  },
+  "serviceStatus": {
+    "operational": "Operational",
+    "degraded": "Degraded Performance",
+    "outage": "Service Outage",
+    "maintenance": "Maintenance"
+  },
+  "incidentStatus": {
+    "investigating": "Investigating",
+    "identified": "Identified",
+    "monitoring": "Monitoring",
+    "resolved": "Resolved"
+  },
+  "common": {
+    "na": "N/A"
+  }
+}

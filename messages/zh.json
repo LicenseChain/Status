@@ -1,0 +1,48 @@
+{
+  "status": {
+    "title": "LicenseChain - 状态监控",
+    "description": "实时监控所有 LicenseChain 服务和基础设施的状态。检查服务运行时间、响应时间和事件报告。",
+    "loading": "正在加载状态...",
+    "unavailable": "状态不可用",
+    "tryAgain": "重试",
+    "allSystemsOperational": "所有系统正常运行",
+    "servicesRunningSmoothly": "{count} 个服务中有 {total} 个运行正常",
+    "uptime": "运行时间",
+    "operationalServices": "运行中的服务",
+    "activeIncidents": "活跃事件",
+    "avgResponseTime": "平均响应时间",
+    "coreServices": "核心服务",
+    "infrastructure": "基础设施",
+    "paymentProcessing": "支付处理",
+    "recentIncidents": "最近事件",
+    "performanceMetrics": "性能指标",
+    "serviceUptime": "服务运行时间",
+    "avgResponse": "平均响应",
+    "operational": "运行中",
+    "issues": "问题",
+    "poweredBy": "由 LicenseChain LLC 提供支持",
+    "followForUpdates": "要获取实时更新，请在 X 上关注 {handle}",
+    "lastChecked": "最后检查",
+    "responseTime": "响应时间",
+    "uptimeLabel": "运行时间",
+    "incidentReport": "事件报告",
+    "affectedServices": "受影响的服务",
+    "created": "创建时间",
+    "lastUpdated": "最后更新"
+  },
+  "serviceStatus": {
+    "operational": "正常运行",
+    "degraded": "性能下降",
+    "outage": "服务中断",
+    "maintenance": "维护中"
+  },
+  "incidentStatus": {
+    "investigating": "调查中",
+    "identified": "已识别",
+    "monitoring": "监控中",
+    "resolved": "已解决"
+  },
+  "common": {
+    "na": "N/A"
+  }
+}
