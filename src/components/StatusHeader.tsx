@@ -28,7 +28,7 @@ const localeNames: Record<string, string> = {
   it: 'Italiano',
 }
 
-export function StatusHeader({ lastUpdated, onRefresh, isRefreshing, isDarkMode, onToggleDarkMode }: StatusHeaderProps) {
+export function StatusHeader({ isDarkMode, onToggleDarkMode }: StatusHeaderProps) {
   const router = useRouter()
   const pathname = usePathname()
   const locale = useLocale()

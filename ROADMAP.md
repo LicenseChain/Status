@@ -19,7 +19,6 @@ This document outlines the planned features and improvements for the LicenseChai
 - [ ] Historical uptime charts
 - [ ] Service-specific status pages
 - [ ] RSS feed for status updates
-- [ ] Email notifications for incidents
 
 ## Q2 2026
 

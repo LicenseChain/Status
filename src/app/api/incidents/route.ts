@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '50')
     const status = searchParams.get('status')
 
-    const where: any = {}
+    const where: { status?: string } = {}
     if (status) {
       where.status = status
     }

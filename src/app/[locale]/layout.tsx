@@ -110,7 +110,7 @@ export default async function LocaleLayout({
   const { locale } = await params
   const finalLocale = locale || routing.defaultLocale
 
-  if (!routing.locales.includes(finalLocale as any)) {
+  if (!routing.locales.includes(finalLocale as (typeof routing.locales)[number])) {
     notFound()
   }
 

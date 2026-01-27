@@ -19,7 +19,9 @@ interface StatusCardProps {
   service: ServiceStatus
 }
 
-const getStatusConfig = (t: any) => ({
+type TranslationFunction = ReturnType<typeof useTranslations<'serviceStatus'>>
+
+const getStatusConfig = (t: TranslationFunction) => ({
   operational: {
     icon: CheckCircle,
     color: 'text-green-500',

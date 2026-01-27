@@ -177,7 +177,7 @@ export async function getAllServiceStatuses(): Promise<ServiceStatus[]> {
       lastChecked: cryptoStatus.lastChecked || 'Just now',
       icon: () => null // Will be set by the component
     } as ServiceStatus)
-  } catch (error) {
+  } catch {
     // If webhook check fails, try alternative check or use operational status
     // This ensures the service appears even if the health endpoint is unavailable
     const cryptoConfig = getServiceConfig('Crypto Processing')
@@ -217,7 +217,7 @@ export async function getAllServiceStatuses(): Promise<ServiceStatus[]> {
       lastChecked: stripeStatus.lastChecked || 'Just now',
       icon: () => null // Will be set by the component
     } as ServiceStatus)
-  } catch (error) {
+  } catch {
     // If webhook check fails, try alternative check or use operational status
     const stripeConfig = getServiceConfig('Stripe Processing')
     // Try a simple connectivity check

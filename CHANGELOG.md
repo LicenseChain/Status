@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Repository description updated for SEO optimization
 - GitHub topics added for better discoverability
 
-## [1.1.0] - 2026-01-29
+## [1.1.0] - 2026-01-15
 
 ### Added
 - SEO optimizations: sitemap.xml, enhanced robots.txt, hreflang tags
@@ -35,7 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Multi-language hreflang tags for all supported locales
 
 ### Changed
-- Updated LICENSE from Proprietary to MIT License
 - Consolidated deployment documentation into README.md
 - Improved README structure following documentation best practices
 - Enhanced metadata with language alternates

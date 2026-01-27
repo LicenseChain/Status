@@ -18,7 +18,9 @@ interface IncidentCardProps {
   incident: Incident
 }
 
-const getStatusConfig = (t: any) => ({
+type TranslationFunction = ReturnType<typeof useTranslations<'incidentStatus'>>
+
+const getStatusConfig = (t: TranslationFunction) => ({
   investigating: {
     icon: AlertTriangle,
     color: 'text-red-500',

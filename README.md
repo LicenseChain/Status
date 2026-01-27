@@ -113,7 +113,7 @@ Visit `http://localhost:3000` to see the status page.
 1. **Connect to Vercel**
    - Go to [Vercel Dashboard](https://vercel.com/dashboard)
    - Click "New Project"
-   - Import from GitHub: `LicenseChain/Status`
+   - Import from GitHub: `Repository/Status`
 
 2. **Configure Project**
    - Framework Preset: Next.js
@@ -125,7 +125,7 @@ Visit `http://localhost:3000` to see the status page.
    - Mark sensitive variables appropriately
 
 4. **Custom Domain**
-   - Add custom domain: `status.licensechain.app`
+   - Add custom domain: `status.domain_here.app`
    - Configure DNS records as instructed
 
 ### Build Commands

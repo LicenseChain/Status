@@ -5,8 +5,7 @@ import { useTranslations } from 'next-intl'
 import { StatusHeader } from '@/components/StatusHeader'
 import { StatusCard } from '@/components/StatusCard'
 import { IncidentCard } from '@/components/IncidentCard'
-import { Activity, Shield, Globe, BookOpen, Layout, Lock, CreditCard, TrendingUp, AlertTriangle, CheckCircle2, Clock, XCircle, Sun, Moon } from 'lucide-react'
-import { getAllServiceStatuses } from '@/lib/status-monitor'
+import { Activity, Shield, Globe, BookOpen, Layout, Lock, CreditCard, TrendingUp, CheckCircle2, XCircle } from 'lucide-react'
 
 interface ServiceStatus {
   name: string
@@ -33,7 +32,12 @@ export default function StatusPage() {
   const [services, setServices] = useState<ServiceStatus[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [metrics, setMetrics] = useState<any>(null)
+  const [metrics, setMetrics] = useState<{
+    operational: number
+    total: number
+    avgResponseTime: number
+    uptime: string
+  } | null>(null)
 
   const [incidents, setIncidents] = useState<Incident[]>([])
 
@@ -41,8 +45,6 @@ export default function StatusPage() {
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(true)
   const t = useTranslations('status')
-  const tService = useTranslations('serviceStatus')
-  const tIncident = useTranslations('incidentStatus')
   const tCommon = useTranslations('common')
 
   // Fetch real-time status data
@@ -74,7 +76,15 @@ export default function StatusPage() {
         'Stripe Processing': CreditCard
       }
       
-      const servicesWithIcons = data.services.map((service: any) => ({
+      const servicesWithIcons = data.services.map((service: {
+        name: string
+        status: string
+        description: string
+        lastChecked: string
+        responseTime?: number
+        uptime: string
+        category: string
+      }) => ({
         ...service,
         icon: iconMap[service.name] || Activity,
         // Ensure status matches expected values
@@ -103,7 +113,15 @@ export default function StatusPage() {
       
       const data = await response.json()
       if (data.success) {
-        setIncidents(data.incidents.map((incident: any) => ({
+        setIncidents(data.incidents.map((incident: {
+          id: string
+          title: string
+          description: string
+          status: string
+          affectedServices: string[]
+          createdAt: string
+          updatedAt: string
+        }) => ({
           id: incident.id,
           title: incident.title,
           status: incident.status,
@@ -157,6 +175,7 @@ export default function StatusPage() {
       fetchIncidents()
     }, 30000)
     return () => clearInterval(interval)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -193,7 +212,6 @@ export default function StatusPage() {
     setIsRefreshing(false)
   }
 
-  const overallStatus = services.every(s => s.status === 'operational') ? 'operational' : 'degraded'
   const operationalCount = services.filter(s => s.status === 'operational').length
   const totalServices = services.length
 

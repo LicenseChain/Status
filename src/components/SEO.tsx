@@ -13,9 +13,7 @@ interface SEOProps {
 export function SEO({ 
   title = 'LicenseChain Status',
   description = 'Real-time status monitoring of all LicenseChain services and infrastructure. Check service uptime, response times, and incident reports.',
-  canonicalUrl,
-  ogImage = 'https://status.licensechain.app/og-image.png',
-  type = 'website'
+  canonicalUrl
 }: SEOProps) {
   const siteUrl = 'https://status.licensechain.app'
   const fullUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl
