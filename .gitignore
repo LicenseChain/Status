@@ -86,6 +86,7 @@ logs
 .npmrc
 .nvmrc
 .specstory
+.cursorignore
 .cursorindexingignore
 
 # AI-generated documentation
