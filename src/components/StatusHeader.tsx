@@ -64,13 +64,12 @@ export function StatusHeader({ isDarkMode, onToggleDarkMode }: StatusHeaderProps
             <a href="/" className="flex items-center">
               <div className="relative h-10 w-10 flex items-center justify-center">
                 <Image
-                  src="/logo.png"
+                  src="/favicon.svg"
                   alt="LicenseChain"
                   width={40}
                   height={40}
                   className="object-contain"
                   priority
-                  unoptimized
                 />
               </div>
             </a>

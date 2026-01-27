@@ -14,6 +14,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Email notifications for incidents
 - API endpoints for status data
 
+## [1.3.0] - 2026-01-29
+
+### Added
+- Locale-specific metadata generation using generateMetadata function
+- Enhanced SEO structured data with locale-aware content
+- BreadcrumbList structured data for better navigation
+- Locale-specific OpenGraph metadata with alternateLocale support
+- Locale-specific keywords in metadata
+- Service Channel structured data with availableLanguage support
+- SearchAction structured data for website search functionality
+
+### Changed
+- Header logo now uses favicon.svg instead of logo.png
+- Structured data now uses favicon.svg for all logo references
+- Metadata generation is now fully locale-aware with translated titles and descriptions
+- OpenGraph locale mapping for all 9 supported languages
+- Enhanced WebSite structured data with inLanguage property
+- Enhanced WebPage structured data with locale-specific content
+
+### Fixed
+- Improved SEO positioning with proper locale-specific metadata
+- Better search engine understanding of multi-language content
+
 ## [1.2.0] - 2026-01-29
 
 ### Added
@@ -56,4 +79,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Responsive design
 
 [Unreleased]: https://github.com/licensechain/status/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/licensechain/status/releases/tag/v1.0.0
+[1.2.0]: https://github.com/licensechain/status/releases/tag/v1.2.0
