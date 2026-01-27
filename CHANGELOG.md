@@ -14,6 +14,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Email notifications for incidents
 - API endpoints for status data
 
+## [1.4.0] - 2026-01-29
+
+### Added
+- Automated cron job for service status checks (6 times per day at random intervals)
+- `/api/cron/check-status` endpoint for automated health monitoring
+- Vercel Cron Jobs configuration for scheduled status updates
+- Historical uptime calculation based on service status history
+- Automatic database updates for service status, response time, and uptime
+
+### Changed
+- Service status "Last checked" timestamps now update automatically via cron job
+- Uptime calculation now uses historical data from last 24 hours
+- Status checks are now performed server-side and persisted to database
+
+### Fixed
+- Fixed issue where all service cards showed the same "Last checked" timestamp
+- Status updates now occur automatically throughout the day instead of only on page load
+
 ## [1.3.0] - 2026-01-29
 
 ### Added
@@ -78,7 +96,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dark mode support
 - Responsive design
 
-[Unreleased]: https://github.com/licensechain/status/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/licensechain/status/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/licensechain/status/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/licensechain/status/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/licensechain/status/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/licensechain/status/compare/v1.0.0...v1.1.0

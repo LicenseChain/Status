@@ -20,6 +20,7 @@ A modern, professional status page for LicenseChain services built with Next.js 
 - **Performance Metrics** - Real-time uptime and response time data
 - **Incident Management** - Track and display service incidents with status updates
 - **Auto-refresh** - Automatic status updates every 30 seconds
+- **Automated Health Checks** - Cron job runs 6 times per day at random intervals to update service statuses
 - **SEO Optimized** - Full SEO support with locale-specific metadata, structured data (Schema.org), sitemap, and multi-language hreflang tags
 - **Language Switcher** - Easy language selection in header with dropdown menu
 
@@ -248,5 +249,5 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) for detai
 ---
 
 **Status**: ✅ Production Ready  
-**Version**: 1.3.0  
+**Version**: 1.4.0  
 **Last Updated**: January 2026
