@@ -140,8 +140,8 @@ export async function generateMetadata({
     },
     icons: {
       icon: [
+        { url: '/icon.ico', sizes: 'any' },
         { url: '/favicon.ico', sizes: 'any' },
-        { url: '/favicon.svg', type: 'image/svg+xml' },
       ],
       apple: [
         { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
@@ -196,7 +196,7 @@ export default async function LocaleLayout({
               url: 'https://licensechain.app',
               logo: {
                 '@type': 'ImageObject',
-                url: `${siteUrl}/favicon.svg`,
+                url: `${siteUrl}/logo.webp`,
               },
               description: 'LicenseChain - Enterprise license management platform',
               sameAs: [
@@ -229,7 +229,7 @@ export default async function LocaleLayout({
                 name: 'LicenseChain',
                 logo: {
                   '@type': 'ImageObject',
-                  url: `${siteUrl}/favicon.svg`,
+                  url: `${siteUrl}/logo.webp`,
                 },
               },
               potentialAction: {

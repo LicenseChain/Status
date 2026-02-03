@@ -25,7 +25,7 @@ export function SEO({
       '@type': 'Organization',
       name: 'LicenseChain',
       url: 'https://licensechain.app',
-      logo: 'https://status.licensechain.app/logo.png',
+      logo: 'https://status.licensechain.app/logo.webp',
       description: 'LicenseChain - Enterprise license management platform',
       sameAs: [
         'https://github.com/LicenseChain',
@@ -45,7 +45,7 @@ export function SEO({
         name: 'LicenseChain',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://status.licensechain.app/logo.png',
+          url: 'https://status.licensechain.app/logo.webp',
         },
       },
     }

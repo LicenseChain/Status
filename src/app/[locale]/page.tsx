@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { StatusHeader } from '@/components/StatusHeader'
 import { StatusCard } from '@/components/StatusCard'
 import { IncidentCard } from '@/components/IncidentCard'
-import { Activity, Shield, Globe, BookOpen, Layout, Lock, CreditCard, TrendingUp, CheckCircle2, XCircle } from 'lucide-react'
+import { Activity, Globe, BookOpen, Layout, Lock, CreditCard, TrendingUp, CheckCircle2, XCircle } from 'lucide-react'
 
 interface ServiceStatus {
   name: string
@@ -231,8 +232,14 @@ export default function StatusPage() {
         </div>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center glass-card dark:glass-card-dark rounded-3xl p-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-6 animate-pulse shadow-lg">
-              <Shield className="w-8 h-8 text-white" />
+            <div className="flex justify-center mb-6">
+              <Image
+                src="/logo.webp"
+                alt="LicenseChain"
+                width={120}
+                height={21}
+                className="h-10 w-auto object-contain animate-pulse"
+              />
             </div>
             <h1 className="text-2xl font-bold text-white mb-4">{t('loading')}</h1>
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
@@ -447,8 +454,14 @@ export default function StatusPage() {
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-white/20 dark:border-white/10">
           <div className="text-center glass-card dark:glass-card-dark rounded-2xl p-6">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <Shield className="w-5 h-5 text-primary" />
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Image
+                src="/logo.webp"
+                alt="LicenseChain"
+                width={90}
+                height={16}
+                className="h-4 w-auto object-contain"
+              />
               <span className="text-sm text-slate-600 dark:text-gray-300">{t('poweredBy')}</span>
             </div>
             <p className="text-sm text-slate-600 dark:text-gray-300">
