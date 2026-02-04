@@ -44,7 +44,7 @@ export default function StatusPage() {
 
   const [lastUpdated, setLastUpdated] = useState<string>('')
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(true)
+  const [isDarkMode, setIsDarkMode] = useState(false)
   const t = useTranslations('status')
   const tCommon = useTranslations('common')
 
@@ -154,14 +154,14 @@ export default function StatusPage() {
   }
 
   useEffect(() => {
-    // Initialize theme from localStorage or default to dark
+    // Initialize theme from localStorage or default to light
     const savedTheme = localStorage.getItem('theme')
-    if (savedTheme === 'light') {
-      setIsDarkMode(false)
-    } else {
+    if (savedTheme === 'dark') {
       setIsDarkMode(true)
+    } else {
+      setIsDarkMode(false)
       if (!savedTheme) {
-        localStorage.setItem('theme', 'dark')
+        localStorage.setItem('theme', 'light')
       }
     }
   }, [])
@@ -180,16 +180,16 @@ export default function StatusPage() {
   }, [])
 
   useEffect(() => {
-    // Apply dark mode class to document (default is dark)
+    // Apply dark mode class to document (default is light)
     if (isDarkMode) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
     }
-    // Set default to dark on mount
+    // Set default to light on mount when no preference saved
     if (!localStorage.getItem('theme')) {
-      localStorage.setItem('theme', 'dark')
-      setIsDarkMode(true)
+      localStorage.setItem('theme', 'light')
+      setIsDarkMode(false)
     }
   }, [isDarkMode])
 

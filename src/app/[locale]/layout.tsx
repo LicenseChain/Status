@@ -172,7 +172,7 @@ export default async function LocaleLayout({
   const currentUrl = `${siteUrl}${finalLocale === 'en' ? '' : `/${finalLocale}`}`
 
   return (
-    <html lang={finalLocale} className="dark" suppressHydrationWarning>
+    <html lang={finalLocale} suppressHydrationWarning>
       <head>
         {/* Hreflang tags for multi-language SEO */}
         {routing.locales.map((loc) => (
