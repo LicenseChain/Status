@@ -455,14 +455,7 @@ export default function StatusPage() {
         <div className="mt-16 pt-8 border-t border-white/20 dark:border-white/10">
           <div className="text-center glass-card dark:glass-card-dark rounded-2xl p-6">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <span className="text-sm text-slate-600 dark:text-gray-300">{t('poweredBy')}</span>
-              <Image
-                src="/logo.webp"
-                alt="LicenseChain"
-                width={90}
-                height={16}
-                className="h-4 w-auto object-contain"
-              />
+              <span className="text-sm text-slate-600 dark:text-gray-300">{t('poweredBy')} LicenseChain LLC</span>
             </div>
             <p className="text-sm text-slate-600 dark:text-gray-300">
               {t.rich('followForUpdates', {
